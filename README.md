@@ -64,4 +64,4 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 128 예�
 + AVR328.pdf ([Dropbox](https://www.dropbox.com/s/ql3lzhbfzwl62mv/ATmega328P.pdf?dl=0), [Web](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf))
 + [BerkeleyX: EE40LX Electronic Interfaces](https://courses.edx.org/courses/course-v1:BerkeleyX+EE40LX+2T2015/info)
 + [AVR Programming Tutorial](http://ocw.mit.edu/courses/media-arts-and-sciences/mas-962-special-topics-new-textiles-spring-2010/readings-lectures-tutorials/tut06_avr1/)
-+ [Atmega 328 레지스터]()
++ [Atmega 328 Summary(http://www.ozeki.hu/attachments/473/ATmega-328P_Summary.pdf)
