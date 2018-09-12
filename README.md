@@ -1,5 +1,5 @@
 # uC_examples
-Microcontroller AVR128을 이용한 예제입니다.
+Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 128 예제이며, 추후 수정 예정)
 강의 자료와 소스 코드는 계속 올리도록 하겠습니다.
 
 ## 강의 개요
