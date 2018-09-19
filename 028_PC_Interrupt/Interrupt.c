@@ -1,18 +1,16 @@
 /*=======================================================*/
-// ¿ÜºÎ ÀÎÅÍ·´Æ®¸¦ ÀÌ¿ëÇÑ 7 segment °ª º¯°æ
-// INT0 (PD0)¸¦ È°¼ºÈ­
+// ì™¸ë¶€ ì¸í„°ëŸ½íŠ¸ë¥¼ ì´ìš©í•œ 7 segment ê°’ ë³€ê²½
+// INT0 (PD0)ë¥¼ í™œì„±í™”
 /*=======================================================*/
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
 int Index = 0;
-unsigned char SEG[10] = { 0XC0, 0XF9, 0XA4, 0XB0, 0X99, 0X92, 0X82, 0XD8, 0X80,
-		0X90 };
 
 volatile uint8_t portbhistory = 0xFF;     // default is high because the pull-up
 
-// ÀÎÅÍ·´Æ® ¼öÇà ÇÔ¼ö´Â ¾Æ·¡¿Í °°ÀÌ
-// SIGNAL(SIG_INTERRUPTn)À¸·Î ÇÏ¿© nÀÌ ÀÎÅÍ·´Æ® ¹øÈ£
+// ì¸í„°ëŸ½íŠ¸ ìˆ˜í–‰ í•¨ìˆ˜ëŠ” ì•„ë˜ì™€ ê°™ì´
+// SIGNAL(SIG_INTERRUPTn)ìœ¼ë¡œ í•˜ì—¬ nì´ ì¸í„°ëŸ½íŠ¸ ë²ˆí˜¸
 ISR(PCINT0_vect) {
 	if (bit_is_clear(PINB, PB0)) {
 		if (++Index > 9)
@@ -28,7 +26,6 @@ ISR(PCINT0_vect) {
 
 int main(void) {
 	DDRD = 0XFF;
-	PORTD = SEG[Index];
 
 	DDRB &= ~(1 << DDB0) ; // Clear the PB0 pin
 	DDRB &= ~(1 << DDB1) ; // Clear the PB1 pin
