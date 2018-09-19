@@ -21,7 +21,7 @@ ISR(PCINT0_vect) {
 		if (--Index < 0)
 			Index = 9;
 	}
-	PORTD = SEG[Index];
+	PORTD = Index<<4;
 }
 
 int main(void) {
