@@ -1,10 +1,8 @@
 /*************************************
- * Purpose: Timer0을 이용하여 1초마다 overflow
- * interrupt에 의한 LED Shift
  *
  * TIMSK
  * TCCR0
- * TCNT0
+ * OCR0A
  *************************************/
 #include <avr/io.h>
 #include <avr/interrupt.h>
