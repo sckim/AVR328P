@@ -25,12 +25,13 @@ int main(void) {
 	PORTD = (sec << 4) + msec8;
 
 	TCCR0A |= (1<<WGM01);
-	TIMSK0 |= (1 << OCIE0A);    // Timer0 오버플로 인터럽트 에이블
 	//CS0[2:0]
 	TCCR0B |= (1 << CS02);	// Clock/1024
 	TCCR0B |= (1 << CS00);	// Clock/1024
 
+	// Toggle on Compare Match
 	//TCCR0A |= _BV(COM0A0);
+	//TCCR0A |= _BV(COM0B0);
 
 	OCR0A = cDelay;
 	while (1) {
