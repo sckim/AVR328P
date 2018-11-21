@@ -31,14 +31,18 @@ void readEEPROM(void) {
 }
 
 int main(void) {
-	uart_init(9600UL);
-
 	stdout = &uart_output;
 	stdin = &uart_input;
 
-	printf("Current EEprom data\r");
-	readEEPROM();
-	writeEEPROM();
-	printf("New EEprom data\r");
-	readEEPROM();
+	uart_init(9600UL);
+	DDRB |= _BV(5);
+
+	while(1){
+		PORTB ^= _BV(5);
+		printf("Current EEprom data\r");
+		readEEPROM();
+		writeEEPROM();
+		printf("New EEprom data\r");
+		readEEPROM();
+	}
 }
