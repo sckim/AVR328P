@@ -8,13 +8,17 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+//#define sbi(sfr, bit) _SFR_BYTE(sfr) |= _BV(bit)
+//#define cbi(sfr, bit) _SFR_BYTE(sfr) &= ~_BV(bit)
+
 int main(void) {
-	DDRB = 0xFF;
+	DDRB |= _BV(PB5);
 
 	while (1) {
-		PORTB = 0xFF;
+		PORTB |= (1 << PB5);
 		_delay_ms(1000);
-		PORTB = 0x00;
+		cbi(PORTB, PB5);
+		PORTB &= ~(1 << PB5);
 		_delay_ms(1000);
 	}
 	return 0;
