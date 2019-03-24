@@ -5,7 +5,7 @@
  * Author : Soochan Kim
  */
 
-#define F_CPU 16000000L
+#define F_CPU 16000000L  //clear warning message
 
 #include <avr/io.h>
 #include <util/delay.h>
