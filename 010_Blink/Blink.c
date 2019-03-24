@@ -1,9 +1,11 @@
 /*
  * 10_Blink.c
  *
- * Created: 2017-08-07 ¿ÀÈÄ 5:12:02
+ * Created: 2017-08-07 Â¿Ã€ÃˆÃ„ 5:12:02
  * Author : Soochan Kim
  */
+
+#define F_CPU 16000000L
 
 #include <avr/io.h>
 #include <util/delay.h>
