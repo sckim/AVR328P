@@ -1,5 +1,5 @@
 /***********************************************************
-* Purpose: 7 segements¿¡ 0¿¡¼­ F±îÁö Ãâ·ÂÇÏ±â
+* Purpose: 7 segementsì— 0ì—ì„œ Fê¹Œì§€ ì¶œë ¥í•˜ê¸°
 *
 * DDRn
 * PORTn
@@ -9,15 +9,14 @@
 
 int main(void)
 {
-	// Common cathod¿¡ ´ëÇÑ °ª decode °ª
-
+	// Common Anodeì— ëŒ€í•œ ê°’ decode ê°’
 	unsigned char SEG[16]= {0xC0, 0xF9,0xA4,0xB0,0x99,0x92,0x82,
 		0xD8,0x80,0x90, 0x88, 0x83, 0xC6, 0xA1, 0x86, 0x8e};
 
 	DDRD = 0xFF;
 
 	while(1) {
-		// i¸¦ 0¿¡¼­ 15±îÁö ¹İº¹ÇÑ´Ù.
+		// ië¥¼ 0ì—ì„œ 15ê¹Œì§€ ë°˜ë³µí•œë‹¤.
 		for(int i=0; i<16; i++) {
 			PORTD = SEG[i];
 			_delay_ms(1000);
