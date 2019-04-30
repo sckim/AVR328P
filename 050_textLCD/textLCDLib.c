@@ -18,6 +18,8 @@ int main(void) {
 	LCDcursorOn();
 	LCDclr();
 
+	// Add delay if LCDstring has a problem
+	// _delay_ms(100);
 	LCDstring((uint8_t*)strWelcome, strlen(strWelcome));
 	LCDGotoXY(0, 1);
 	LCDstring((uint8_t*)strWelcome1, strlen(strWelcome1));
