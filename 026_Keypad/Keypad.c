@@ -7,7 +7,7 @@
 #define KEYPAD_PIN   	PINB
 
 #define Segment_PORT	PORTD
-#define Segment_DDR		DDRD
+#define Segment_DDR	DDRD
 //*******************************
 
 typedef unsigned char BYTE;
