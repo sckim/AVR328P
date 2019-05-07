@@ -36,11 +36,8 @@ int key_scan(void) {
 		case 0x05: //00000101
 			temp_SW = 2;
 			break;
-		case 0x06: //00000110
-			temp_SW = 3;
-			break;
 		default:
-			temp_SW = 4;
+			temp_SW = 3;
 		}
 		//	  }
 	}
