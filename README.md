@@ -57,7 +57,8 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 
 ### 11주차: Serial communicate (UART)
 + [UART Simple](https://github.com/sckim/AVR328P/blob/master/050_UART/UART_simple.c)
-+ [UART communication]
++ UART communication
+
 [![](http://img.youtube.com/vi/jlNPgtgmFzM/0.jpg)](http://www.youtube.com/watch?v=jlNPgtgmFzM "Serial Communication")
 
 ### 12주차: SPI
