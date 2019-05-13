@@ -31,9 +31,11 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 
 ### 6주차: 디스플레이장치 (7Segments) 
 + [7Segments 사용하기](https://github.com/sckim/AVR328P/blob/master/015_7Segments/7Segments.c), [회로도](https://github.com/sckim/AVR328P/blob/master/015_7Segments/AVR328P_LCD_7Seg.DSN)
+
 [![](http://img.youtube.com/vi/E7OPkgIjPyo/0.jpg)](http://www.youtube.com/watch?v=E7OPkgIjPyo "7Segments display")
 
 + [4개의 7Segments 사용하기](https://github.com/sckim/uC_examples/blob/master/48_Four7Segments_itoa/Four7Segments.c), [회로도](https://github.com/sckim/uC_examples/blob/master/48_Four7Segments_itoa/Four7Segments.DSN)
+
 [![](http://img.youtube.com/vi/qo5lWw_W_tg/0.jpg)](http://www.youtube.com/watch?v=qo5lWw_W_tg "4 digits FND")
 
 ### 7주차: 디스플레이장치 (LCD) 
