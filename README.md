@@ -11,7 +11,7 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 
 ### 2주차: 개발환경구축
 + AVR Studio ([Ver 7](http://www.microchip.com/mplab/avr-support/atmel-studio-7), [Ver 4.19](https://www.dropbox.com/s/3c2vubam8lwj42c/AvrStudio4Setup.exe?dl=0))
-+ Eclipse for AVR
++ Eclipse for AVR ([Neon](https://www.eclipse.org/downloads/packages/release/neon/3/eclipse-ide-cc-developers), AVR Plugin 설치)
 + [AVRToolchain](https://www.dropbox.com/s/7j8wxu1b2sp6b6n/AVR-Toolchain_330710.exe?dl=0)
 + [WinAVR](https://sourceforge.net/projects/winavr/files/) - avr gcc compiler
 + [Training Boar Kit](https://docs.google.com/document/d/1z8ZOeDaLLHn7CCoW8pkEYocl6X6kjT0bNDkCtDhy2is/edit#heading=h.ewk21ulbo3a9) - 학교에 있는 실습 키트
