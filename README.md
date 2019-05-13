@@ -37,13 +37,15 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 + [LCD 함수 이용해서 제어](https://github.com/sckim/uC_examples/blob/master/68_textLCDLib/textLCDLib.c), [회로도](https://github.com/sckim/AVR328P/blob/master/050_textLCD/AVR328P_LCD.DSN), [lcd_lib.c](https://github.com/sckim/AVR328P/blob/master/050_textLCD/lcd_lib.c), [lcd_lib.h](https://github.com/sckim/AVR328P/blob/master/050_textLCD/lcd_lib.h)
 
 ### 8주차: Analog to Digital 
-+ [ADC 값을 부동소수점으로 출력하기](https://github.com/sckim/uC_examples/blob/master/101_ADC_on_LCD/ADC_on_LCD.c), [회로도](https://github.com/sckim/uC_examples/blob/master/101_ADC_on_LCD/ADC.DSN)
++ [ADC 값을 부동소수점으로 출력하기](https://github.com/sckim/uC_examples/blob/master/101_ADC_on_LCD/ADC_on_LCD.c), [회로도](https://github.com/sckim/AVR328P/blob/master/035_textLCDADC/AVR328P_LCD.DSN)
 
 ### 9주차: Timer
-+ [Timer 0 Overflow 인터럽트 활용](https://github.com/sckim/uC_examples/blob/master/105_ADC_on_LCD_Timer/ADC_on_LCD_Timer.c)
-+ [Timer 0 Ouput match 인터럽트 활용](https://github.com/sckim/uC_examples/blob/master/107_ADC_on_LCD_OCR/ADC_on_LCD_OCR.c)
++ [Timer 0 Overflow Flag 활용](https://github.com/sckim/AVR328P/blob/master/040_Timer0Overflow/Timer0_8mSec.c)
++ [Timer 0 Overflow 인터럽트 활용](https://github.com/sckim/AVR328P/blob/master/041_Timer0Overflow_Int/Timer0_8mSec.c)
++ [Timer 0 Ouput match Flag 활용](https://github.com/sckim/AVR328P/blob/master/042_Timer0_CTC/Timer0_8mSec.c)
++ [Timer 0 Ouput match 인터럽트 활용](https://github.com/sckim/AVR328P/blob/master/043_Timer0_CTC_int/Timer0_10mSec.c)
 + Timer 2
-+ [회로도](https://github.com/sckim/uC_examples/blob/master/101_ADC_on_LCD/ADC.DSN)
++ [회로도](https://github.com/sckim/AVR328P/blob/master/043_Timer0_CTC_int/AVR328P_Key_7Seg.DSN)
 
 ### 10주차: Timer (PWM)
 + Timer 1, 3
