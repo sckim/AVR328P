@@ -15,7 +15,8 @@
 volatile int sec = 0;
 volatile int msec8 = 0;
 
-SIGNAL (TIMER0_COMPA_vect) {
+//SIGNAL (TIMER0_COMPA_vect) {
+ISR (TIMER0_COMPA_vect) {
 	char s10, s1;
 
 	msec8++;
