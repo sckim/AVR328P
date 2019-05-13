@@ -24,7 +24,7 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 + Debounce
 
 ### 4주차: 범용 입력 
-+ [4x3 Keypad 입력](https://github.com/sckim/uC_examples/blob/master/25_Keypad/Keypad.c), [회로도](https://github.com/sckim/uC_examples/blob/master/25_Keypad/Keypad.DSN)
++ [4x3 Keypad 입력](https://github.com/sckim/AVR328P/blob/master/026_Keypad/Keypad.c), [회로도](https://github.com/sckim/AVR328P/blob/master/026_Keypad/Keypad.pdsprj)
 
 ### 5주차: 외부 인터럽트 
 + [Interrupter를 사용한 버튼 입력](https://github.com/sckim/AVR328P/blob/master/027_Interrupt/Interrupt.c), [회로도](https://github.com/sckim/AVR328P/blob/master/027_Interrupt/AVR328P_7Seg_decoder.DSN)
