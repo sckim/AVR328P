@@ -30,11 +30,11 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 + [Interrupter를 사용한 버튼 입력](https://github.com/sckim/AVR328P/blob/master/027_Interrupt/Interrupt.c), [회로도](https://github.com/sckim/AVR328P/blob/master/027_Interrupt/AVR328P_7Seg_decoder.DSN)
 
 ### 6주차: 디스플레이장치 (7Segments) 
-+ [7Segments 사용하기](https://github.com/sckim/uC_examples/blob/master/14_7Segments/16_7Segments.c), [회로도](https://github.com/sckim/uC_examples/blob/master/10_Blink/AVR128_LED_7Seg.DSN)
++ [7Segments 사용하기](https://github.com/sckim/AVR328P/blob/master/015_7Segments/7Segments.c), [회로도](https://github.com/sckim/AVR328P/blob/master/015_7Segments/AVR328P_LCD_7Seg.DSN)
 + [4개의 7Segments 사용하기](https://github.com/sckim/uC_examples/blob/master/48_Four7Segments_itoa/Four7Segments.c), [회로도](https://github.com/sckim/uC_examples/blob/master/48_Four7Segments_itoa/Four7Segments.DSN)
 
 ### 7주차: 디스플레이장치 (LCD) 
-+ [LCD 함수 이용해서 제어](https://github.com/sckim/uC_examples/blob/master/68_textLCDLib/textLCDLib.c), [회로도](https://github.com/sckim/AVR328P/blob/master/050_textLCD/AVR328P_LCD.DSN), [lcd_lib.c](https://github.com/sckim/AVR328P/blob/master/050_textLCD/lcd_lib.c), [lcd_lib.h](https://github.com/sckim/AVR328P/blob/master/050_textLCD/lcd_lib.h)
++ [LCD 함수 이용해서 제어](https://github.com/sckim/AVR328P/blob/master/032_LibTextLCD/textLCDLib.c), [회로도](https://github.com/sckim/AVR328P/blob/master/050_textLCD/AVR328P_LCD.DSN), [lcd_lib.c](https://github.com/sckim/AVR328P/blob/master/050_textLCD/lcd_lib.c), [lcd_lib.h](https://github.com/sckim/AVR328P/blob/master/050_textLCD/lcd_lib.h)
 
 ### 8주차: Analog to Digital 
 + [ADC 값을 부동소수점으로 출력하기](https://github.com/sckim/uC_examples/blob/master/101_ADC_on_LCD/ADC_on_LCD.c), [회로도](https://github.com/sckim/AVR328P/blob/master/035_textLCDADC/AVR328P_LCD.DSN)
