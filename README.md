@@ -48,7 +48,6 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 + [Timer 0 Overflow Flag 활용](https://github.com/sckim/AVR328P/blob/master/040_Timer0Overflow/Timer0_8mSec.c)
 
 [![](http://img.youtube.com/vi/Ti-dp8jSOQM/0.jpg)](http://www.youtube.com/watch?v=Ti-dp8jSOQM "One second timer")
-
 + [Timer 0 Overflow 인터럽트 활용](https://github.com/sckim/AVR328P/blob/master/041_Timer0Overflow_Int/Timer0_8mSec.c)
 + [Timer 0 Ouput match Flag 활용](https://github.com/sckim/AVR328P/blob/master/042_Timer0_CTC/Timer0_8mSec.c)
 + [Timer 0 Ouput match 인터럽트 활용](https://github.com/sckim/AVR328P/blob/master/043_Timer0_CTC_int/Timer0_10mSec.c)
