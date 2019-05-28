@@ -2,7 +2,7 @@
  * Purpose: Timer0을 이용하여 1초마다 overflow
  * interrupt에 의한 LED Shift
  *
- * TCCR0A
+ * TCCR 0A
  * TCCR0B
  * TCNT0
  *************************************/
