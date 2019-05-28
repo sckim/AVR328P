@@ -1,7 +1,7 @@
 /*
  * 10_Blink.c
  *
- * Created: 2017-08-07 ¿ÀÈÄ 5:12:02
+ * Created: 2017-08-07 ì˜¤í›„ 5:12:02
  * Author : Soochan Kim
  */
 
