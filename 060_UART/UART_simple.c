@@ -1,3 +1,9 @@
+/*
+ * UART_simple.c
+ *
+ *  Created on: 2019. 5. 28.
+ *      Author: Soochan Kim
+ */
 #include <avr/io.h>
 #include <util/delay.h>
 #include <stdio.h>
@@ -94,3 +100,4 @@ int main(void) {
 	}
 	return 0; // never reached
 }
+
