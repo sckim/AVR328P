@@ -1,7 +1,7 @@
 /*
  * 10_Blink.c
  *
- * Created: 2017-08-07 ì‹œê°„ 5:12:02
+ * Created: 2017-08-07 ½Ã°£ 5:12:02
  * Author : Soochan Kim
  */
 
@@ -10,15 +10,15 @@
 
 int main(void) {
 	
-	// PortBì—ì„œ PB0í•€ì˜ ê¸°ëŠ¥ì„ ì¶œë ¥ìœ¼ë¡œ ì„¤ì •
+	// PortB¿¡¼­ PB0ÇÉÀÇ ±â´ÉÀ» Ãâ·ÂÀ¸·Î ¼³Á¤
 	DDRB |= 0x01;
 	
 	while (1) {
-		// PortBì˜ PB0í•€ë§Œ Highë¥¼ ì¶œë ¥, ë‚˜ë¨¸ì§€ëŠ” í˜„ìž¬ì˜ ê°’ ê·¸ëŒ€ë¡œ
+		// PortBÀÇ PB0ÇÉ¸¸ High¸¦ Ãâ·Â, ³ª¸ÓÁö´Â ÇöÀçÀÇ °ª ±×´ë·Î
 		PORTB |= 0x01;
-		// 1000ms ê¸°ë‹¤ë¦¼
+		// 1000ms ±â´Ù¸²
 		_delay_ms(1000);
-		// PortBì˜ PB0í•€ë§Œ Lowë¡œ ì¶œë ¥, ë‚˜ë¨¸ì§€ëŠ” í˜„ìž¬ì˜ ê°’ ê·¸ëŒ€ë¡œ
+		// PortBÀÇ PB0ÇÉ¸¸ Low·Î Ãâ·Â, ³ª¸ÓÁö´Â ÇöÀçÀÇ °ª ±×´ë·Î
 		PORTB &= ~0x01;
 		_delay_ms(1000);
 	}
