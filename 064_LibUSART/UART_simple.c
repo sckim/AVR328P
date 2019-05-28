@@ -1,3 +1,7 @@
+/*
+ * Atmel에서 제공하는 Library를 이용한 경우
+ *
+ */
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
