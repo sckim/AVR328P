@@ -10,27 +10,26 @@
 
 char str[80];
 
-/* http://www.cs.mun.ca/~rod/Winter2007/4723/notes/serial/serial.html */
 void InitUART(unsigned long iBaudrate) {
 
-	// UCSRnA ·¹Áö½ºÅÍ¸¦ ÃÊ±âÈ­½ÃÅ²´Ù.
-	// 0¹øÂ° ºñÆ®, Áï MPCMn ¸¦ 0À¸·Î ¼¼Æ® (USARTnÀ» ¸ÖÆ¼ ÇÁ·Î¼¼¼­ Åë½Å¸ðµå·Î ¼³Á¤)
+	// UCSRnA ë ˆì§€ìŠ¤í„°ë¥¼ ì´ˆê¸°í™”ì‹œí‚¨ë‹¤.
+	// 0ë²ˆì§¸ ë¹„íŠ¸, ì¦‰ MPCMn ë¥¼ 0ìœ¼ë¡œ ì„¸íŠ¸ (USARTnì„ ë©€í‹° í”„ë¡œì„¸ì„œ í†µì‹ ëª¨ë“œë¡œ ì„¤ì •)
 	UCSR0A = 0x00;
 
-	// UCSRnB ·¹Áö½ºÅÍ¸¦ ÀÌ¿ëÇÏ¿© ¼Û½Å ¹× ¼ö½Å »ç¿ë¼³Á¤À» ÇÑ´Ù.
+	// UCSRnB ë ˆì§€ìŠ¤í„°ë¥¼ ì´ìš©í•˜ì—¬ ì†¡ì‹  ë° ìˆ˜ì‹  ì‚¬ìš©ì„¤ì •ì„ í•œë‹¤.
 	// Rx, Tx enable
-	// TXENn (USARTn¸ðµâÀÇ ¼Û½ÅºÎ µ¿ÀÛ enable)
-	// RXENn (USARTn¸ðµâÀÇ ¼ö½ÅºÎ µ¿ÀÛ enable)
+	// TXENn (USARTnëª¨ë“ˆì˜ ì†¡ì‹ ë¶€ ë™ìž‘ enable)
+	// RXENn (USARTnëª¨ë“ˆì˜ ìˆ˜ì‹ ë¶€ ë™ìž‘ enable)
 	UCSR0B = (1 << RXEN0);
 	UCSR0B |= (1 << TXEN0);
 
-	// UCRnC ·¹Áö½ºÅÍ¸¦ ÀÌ¿ëÇÏ¿© ¸ðµå(µ¿±â/ºñµ¿±â), ÆÐ¸®Æ¼¸ðµå, Á¤ÁöºñÆ®,
-	// ºñµ¿±â ¹æ½Ä, No Parity bit, 1 Stop bit, 8bits
+	// UCRnC ë ˆì§€ìŠ¤í„°ë¥¼ ì´ìš©í•˜ì—¬ ëª¨ë“œ(ë™ê¸°/ë¹„ë™ê¸°), íŒ¨ë¦¬í‹°ëª¨ë“œ, ì •ì§€ë¹„íŠ¸,
+	// ë¹„ë™ê¸° ë°©ì‹, No Parity bit, 1 Stop bit, 8bits
 	UCSR0C |= (1 << UCSZ01);
 	UCSR0C |= (1 << UCSZ00);
 
 	// See http://wormfood.net/avrbaudcalc.php
-	// UBRRnH(L) ·¹Áö½ºÅÍ¸¦ ÀÌ¿ëÇÑ ¼Û¼ö½Å º¸·¹ÀÌÆ® ¼³Á¤
+	// UBRRnH(L) ë ˆì§€ìŠ¤í„°ë¥¼ ì´ìš©í•œ ì†¡ìˆ˜ì‹  ë³´ë ˆì´íŠ¸ ì„¤ì •
 	UBRR0H = 0x00;
 	switch (iBaudrate) {
 	case 9600:
@@ -50,7 +49,7 @@ void InitUART(unsigned long iBaudrate) {
 	}
 }
 
-void USART_Transmit(unsigned char data) {
+void UART_Transmit(unsigned char data) {
 	/* Wait for empty transmit buffer */
 	//while (!( UCSR0A & (1 << UDRE0)))
 	//	;
@@ -70,7 +69,7 @@ unsigned char UART_Receive(void) {
 
 void UART_putString(char *data) {
 	while (*data != '\0')
-		USART_Transmit(*data++);
+		UART_Transmit(*data++);
 }
 
 int main(void) {
@@ -83,7 +82,7 @@ int main(void) {
 
 	i = 0;
 	while (text[i] != '\0') {
-		USART_Transmit(text[i++]);
+		UART_Transmit(text[i++]);
 	}
 
 	UART_putString(echo);
@@ -94,7 +93,7 @@ int main(void) {
 	for (;;) {
 		recieved_byte = UART_Receive();
 		_delay_ms(10);
-		USART_Transmit(recieved_byte);
+		UART_Transmit(recieved_byte);
 		if (recieved_byte == 0x0D)
 			UART_putString(echo);
 	}
