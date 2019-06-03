@@ -73,7 +73,7 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 + 부트로더
 
 ## 참고자료
-+ 즐기면서 익히는 uC (자체자료)
++ Atmega328P 입문 (자체자료)
 + AVR328.pdf ([Dropbox](https://www.dropbox.com/s/ql3lzhbfzwl62mv/ATmega328P.pdf?dl=0), [Web](http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-42735-8-bit-AVR-Microcontroller-ATmega328-328P_Datasheet.pdf))
 + [BerkeleyX: EE40LX Electronic Interfaces](https://courses.edx.org/courses/course-v1:BerkeleyX+EE40LX+2T2015/info)
 + [AVR Programming Tutorial](http://ocw.mit.edu/courses/media-arts-and-sciences/mas-962-special-topics-new-textiles-spring-2010/readings-lectures-tutorials/tut06_avr1/)
