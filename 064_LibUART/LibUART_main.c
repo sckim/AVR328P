@@ -1,3 +1,7 @@
+/*
+ * Library를 이용한 시리얼 통신
+ *
+ */
 #include <avr/io.h>
 #include <stdio.h>
 #include <util/delay.h>
