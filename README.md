@@ -14,7 +14,7 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 + Eclipse for AVR ([Neon](https://www.eclipse.org/downloads/packages/release/neon/3/eclipse-ide-cc-developers), [AVR Plugin 설치](https://marketplace.eclipse.org/category/free-tagging/avr))
 + [AVRToolchain](https://www.dropbox.com/s/7j8wxu1b2sp6b6n/AVR-Toolchain_330710.exe?dl=0)
 + [WinAVR](https://sourceforge.net/projects/winavr/files/) - avr gcc compiler
-+ [Training Boar Kit](https://docs.google.com/document/d/1z8ZOeDaLLHn7CCoW8pkEYocl6X6kjT0bNDkCtDhy2is/edit#heading=h.ewk21ulbo3a9) - 학교에 있는 실습 키트 (요청시 권한 부여)
++ [Training Board Kit - Atmega128L ](https://docs.google.com/document/d/1z8ZOeDaLLHn7CCoW8pkEYocl6X6kjT0bNDkCtDhy2is/edit#heading=h.ewk21ulbo3a9) - 학교에 있는 실습 키트 (요청시 권한 부여)
 + [필수프로그램](https://www.dropbox.com/s/invxn9zygupyc5h/Core.zip?dl=0) - AVRStudio4.19, AVR-Toolchain, WinAVR, msys-1.0.dll을 한꺼번에 받을 수 있습니다.
 + 개발에 도움이 되는 유틸리티 - [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), [ISP-Pololu programmer](https://www.dropbox.com/s/yxbxef388oqb1lm/pololu-usb-avr-programmer-v2-1.0.1-win.msi?dl=0)
 
