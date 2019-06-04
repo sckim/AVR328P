@@ -1,56 +1,50 @@
 #include <avr/io.h>
 #include <stdio.h>
 
-#ifndef BAUD
-#define BAUD 9600
-#endif
-
-#include <util/setbaud.h>
-
 /* http://www.cs.mun.ca/~rod/Winter2007/4723/notes/serial/serial.html */
 void InitUART(unsigned long iBaudrate) {
 
-	// UCSRnA ·¹Áö½ºÅÍ¸¦ ÃÊ±âÈ­½ÃÅ²´Ù.
-	// 0¹øÂ° ºñÆ®, Áï MPCMn ¸¦ 0À¸·Î ¼¼Æ® (USARTnÀ» ¸ÖÆ¼ ÇÁ·Î¼¼¼­ Åë½Å¸ğµå·Î ¼³Á¤)
+	// UCSRnA ë ˆì§€ìŠ¤í„°ë¥¼ ì´ˆê¸°í™”ì‹œí‚¨ë‹¤.
+	// 0ë²ˆì§¸ ë¹„íŠ¸, ì¦‰ MPCMn ë¥¼ 0ìœ¼ë¡œ ì„¸íŠ¸ (USARTnì„ ë©€í‹° í”„ë¡œì„¸ì„œ í†µì‹ ëª¨ë“œë¡œ ì„¤ì •)
 	UCSR0A = 0x00;
 
-	// UCSRnB ·¹Áö½ºÅÍ¸¦ ÀÌ¿ëÇÏ¿© ¼Û½Å ¹× ¼ö½Å »ç¿ë¼³Á¤À» ÇÑ´Ù.
+	// UCSRnB ë ˆì§€ìŠ¤í„°ë¥¼ ì´ìš©í•˜ì—¬ ì†¡ì‹  ë° ìˆ˜ì‹  ì‚¬ìš©ì„¤ì •ì„ í•œë‹¤.
 	// Rx, Tx enable
 	UCSR0B = (1 << RXEN0) | (1 << TXEN0);
 
-	// 3¹øÂ°, 4¹øÂ° ºñÆ® ¼¼Æ® Áï, TXENn (USARTn¸ğµâÀÇ ¼Û½ÅºÎ µ¿ÀÛ enable) RXENn (USARTn¸ğµâÀÇ ¼ö½ÅºÎ µ¿ÀÛ enable)
-	//  2¹ø ºñÆ® UCSZ02 = 0À¸·Î ¼¼Æ®
+	// 3ë²ˆì§¸, 4ë²ˆì§¸ ë¹„íŠ¸ ì„¸íŠ¸ ì¦‰, TXENn (USARTnëª¨ë“ˆì˜ ì†¡ì‹ ë¶€ ë™ì‘ enable) RXENn (USARTnëª¨ë“ˆì˜ ìˆ˜ì‹ ë¶€ ë™ì‘ enable)
+	//  2ë²ˆ ë¹„íŠ¸ UCSZ02 = 0ìœ¼ë¡œ ì„¸íŠ¸
 
-	// UCRnC ·¹Áö½ºÅÍ¸¦ ÀÌ¿ëÇÏ¿© ¸ğµå(µ¿±â/ºñµ¿±â), ÆĞ¸®Æ¼¸ğµå, Á¤ÁöºñÆ®,
-	// Àü¼Û µ¥ÀÌÅÍ ºñÆ®¼ö¸¦ ¼³Á¤ÇÑ´Ù.
-	// ºñµ¿±â ¹æ½Ä, No Parity bit, 1 Stop bit, 8bits
+	// UCRnC ë ˆì§€ìŠ¤í„°ë¥¼ ì´ìš©í•˜ì—¬ ëª¨ë“œ(ë™ê¸°/ë¹„ë™ê¸°), íŒ¨ë¦¬í‹°ëª¨ë“œ, ì •ì§€ë¹„íŠ¸,
+	// ì „ì†¡ ë°ì´í„° ë¹„íŠ¸ìˆ˜ë¥¼ ì„¤ì •í•œë‹¤.
+	// ë¹„ë™ê¸° ë°©ì‹, No Parity bit, 1 Stop bit, 8bits
 	UCSR0C |= (1 << UCSZ01);
 	UCSR0C |= (1 << UCSZ00);
 
 	// See http://wormfood.net/avrbaudcalc.php
-	// UBRRnH(L) ·¹Áö½ºÅÍ¸¦ ÀÌ¿ëÇÑ ¼Û¼ö½Å º¸·¹ÀÌÆ® ¼³Á¤
+	// UBRRnH(L) ë ˆì§€ìŠ¤í„°ë¥¼ ì´ìš©í•œ ì†¡ìˆ˜ì‹  ë³´ë ˆì´íŠ¸ ì„¤ì •
 	UBRR0H = 0x00;
 	switch (iBaudrate) {
-	case 9600:
+		case 9600:
 		//UBRR0L = 95; // 14.7456 MHz -> 9600 bps
 		UBRR0L = 103; // 16 MHz -> 9600 bps
 		break;
-	case 19200:
+		case 19200:
 		UBRR0L = 47; // 14.7456 MHz -> 19200 bps
 		break;
-	case 115200:
+		case 115200:
 		//UBRR0L = 7;  // 14.7456 MHz -> 115200 bps
 		UBRR0L = 8;  // 16 MHz -> 115200 bps
 		break;
-	default:
+		default:
 		UBRR0L = 95;
 	}
 }
 
 void UART_Transmit(unsigned char data) {
-	//Àü¼ÛÁØºñ°¡ µÉ ¶§±îÁö ´ë±â
+	//ì „ì†¡ì¤€ë¹„ê°€ ë  ë•Œê¹Œì§€ ëŒ€ê¸°
 	while ((UCSR0A & (1 << UDRE0)) == 0)
-		;
+	;
 	// while(!(UCSR0A & 0x20)) ;
 
 	UDR0 = data;
@@ -61,4 +55,3 @@ unsigned char UART_Receive(void) {
 
 	return UDR0;
 }
-
