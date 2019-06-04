@@ -21,12 +21,12 @@ void printSegment(unsigned char number) {
 
 int SegmentPrompt(void) {
 
-	printf("Enter your number [press 'q' to upper menu]: ");
+	printf("Enter your number [press 'q' to upper menu]: \r\n");
 	key_input = getchar();
-	printf("%c\n", key_input);
+	printf("%c\r\n", key_input);
 	_delay_ms(200);
 	if (key_input == 'q') {
-		puts("Goodbye segment\n");
+		printf("Goodbye segment\r\n");
 		return 1;
 	}
 	printSegment(key_input - 0x30);
@@ -35,40 +35,41 @@ int SegmentPrompt(void) {
 
 int GetADC(void) {
 
-	printf("Enter channel number [press 'q' to upper menu]: ");
+	printf("\r\nEnter channel number [press 'q' to upper menu]: ");
 	key_input = getchar();
-	printf("%c\n", key_input);
+	printf("%c\r\n", key_input);
 	_delay_ms(200);
 	if (key_input == 'q') {
-		puts("Goodbye ADC\n");
+		printf("\r\nGoodbye ADC");
 		return 1;
 	}
 	key_input -= 0x30;
-	printf("Ch[%d] = %d\n", key_input, ReadADC(key_input));
+	printf("\r\nCh[%d] = %d\n", key_input, ReadADC(key_input));
 	return 0;
 }
 
 void menu(void) {
-	puts("\n===================");
-	puts("     Main Menu     ");
-	puts("-------------------");
-	puts("1. Display Segment");
-	puts("2. Get ADC");
-	puts("\nQ. Exit");
+	printf("\r\n===================");
+	printf("\r\n     Main Menu     ");
+	printf("\r\n-------------------");
+	printf("\r\n1. Display Segment");
+	printf("\r\n2. Get ADC");
+	printf("\r\n\nQ. Exit");
 }
 
 int main(void) {
 	InitUART(9600UL);
+	InitADC();
 
 	stdout = &uart_output;
-//	stdin = &uart_input;
+	stdin = &uart_input;
 
-	printf("Hello world!");
+	printf("Hello world!\r\n");
 	while (1) {
 		menu();
-		printf("Choose menu : ");
-		key_input = UART_getch();
-		printf("%c\n", key_input);
+		printf("\r\nChoose menu : ");
+		key_input = UART_Receive();
+		printf("%c\r\n", key_input);
 		_delay_ms(200);
 		switch (key_input) {
 		case '1':
@@ -76,17 +77,16 @@ int main(void) {
 				;
 			break;
 		case '2':
-			InitADC();
 			while (!GetADC())
 				;
 			break;
 		case 'q':
 		case 'Q':
-			puts("\nGood bye, Main\n");
+			printf("\r\nGood bye, Main");
 			printSegment(4);
 			return 0;
 		default:
-			printf("\n");
+			printf("\r\n");
 		}
 	}
 	return 0;

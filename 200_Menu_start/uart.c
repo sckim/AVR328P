@@ -47,7 +47,7 @@ void InitUART(unsigned long iBaudrate) {
 	}
 }
 
-void UART_putch(unsigned char data) {
+void UART_Transmit(unsigned char data) {
 	//전송준비가 될 때까지 대기
 	while ((UCSR0A & (1 << UDRE0)) == 0)
 		;
@@ -56,23 +56,9 @@ void UART_putch(unsigned char data) {
 	UDR0 = data;
 }
 
-void UART_putchar(unsigned char data, FILE *stream) {
-	if (data == '\n') {
-		UART_putchar('\r', stream);
-	}
-	loop_until_bit_is_set(UCSR0A, UDRE0);
-
-	UDR0 = data;
-}
-
-unsigned char UART_getch(void) {
+unsigned char UART_Receive(void) {
 	loop_until_bit_is_set(UCSR0A, RXC0);
 
 	return UDR0;
 }
 
-unsigned char UART_getchar(FILE *stream) {
-	loop_until_bit_is_set(UCSR0A, RXC0);
-
-	return UDR0;
-}

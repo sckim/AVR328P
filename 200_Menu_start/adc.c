@@ -16,6 +16,7 @@ void InitADC() {
 
 uint16_t ReadADC(uint8_t ch) {
 	//Select ADC Channel ch must be 0-7
+	ADMUX &= ~0x07;
 	ADMUX |= (ch & 0x07);
 
 	//Start Single conversion
