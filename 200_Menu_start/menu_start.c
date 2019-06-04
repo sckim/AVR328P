@@ -1,6 +1,4 @@
 #include <avr/io.h>
-//#include <stdio.h>
-//#include <string.h>
 #include <util/delay.h>
 #include <avr/interrupt.h>
 
@@ -72,20 +70,20 @@ int main(void) {
 		printf("%c\r\n", key_input);
 		_delay_ms(200);
 		switch (key_input) {
-		case '1':
+			case '1':
 			while (!SegmentPrompt())
-				;
+			;
 			break;
-		case '2':
+			case '2':
 			while (!GetADC())
-				;
+			;
 			break;
-		case 'q':
-		case 'Q':
+			case 'q':
+			case 'Q':
 			printf("\r\nGood bye, Main");
 			printSegment(4);
 			return 0;
-		default:
+			default:
 			printf("\r\n");
 		}
 	}
