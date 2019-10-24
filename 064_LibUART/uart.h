@@ -245,4 +245,3 @@ extern void uart1_flush(void);
 
 
 #endif // UART_H 
-
