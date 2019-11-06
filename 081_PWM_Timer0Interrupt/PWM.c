@@ -1,5 +1,5 @@
 ///*************************************
-// * Purpose: Timer0À» ÀÌ¿ëÇÑ OC0A(PD6)¿¡ PWM »ı¼º
+// * Purpose: Timer0ì„ ì´ìš©í•œ OC0A(PD6)ì— PWM ìƒì„±
 // *
 // *
 // *************************************/
@@ -11,7 +11,7 @@
 // from TCNT = (CS / 16000000 ) * (256-x) =10msec
 // x = time * (16000000/CS)
 // if cs = 1024
-// TCNT0°¡ 0ÀÌ¸é 16.384ms ¸¶´Ù overflow ¹ß»ı
+// TCNT0ê°€ 0ì´ë©´ 16.384ms ë§ˆë‹¤ overflow ë°œìƒ
 
 #define Normal 	0
 #define PWM		1
@@ -91,7 +91,7 @@ ISR (TIMER0_OVF_vect) {
 	PORTB ^= _BV(PB5);
 	_delay_us(1000);	//100us
 	PORTB &= ~_BV(PB5);
-	TCNT0 = 0;  //Period°¡ 16.25msecÀÌ±â ¶§¹®¿¡
+	TCNT0 = 0;  //Periodê°€ 16.25msecì´ê¸° ë•Œë¬¸ì—
 }
 
 int main(void) {
@@ -99,10 +99,9 @@ int main(void) {
 	DDRB |= (1 << PB5);
 
 	cli();
-	TIMSK0 |= (1<<TOIE0);    // Timer0 ¿À¹öÇÃ·Î ÀÎÅÍ·´Æ® mask enable
-	//TIFR0 |= (1<<TOV0);
+	TIMSK0 |= (1<<TOIE0);    // Timer0 ì˜¤ë²„í”Œë¡œ ì¸í„°ëŸ½íŠ¸ mask enable
 
-	Timer0Mode(Normal);		 // ÀÏ¹İ timer mode
+	Timer0Mode(Normal);		 // ì¼ë°˜ timer mode
 	Timer0Prescaler(1024);	 // 16MHz/256 => 1 step = 16us
 
 	sei();
