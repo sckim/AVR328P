@@ -1,5 +1,5 @@
 /*
-* Library¸¦ ÀÌ¿ëÇÑ ½Ã¸®¾ó Åë½Å
+* Libraryë¥¼ ì´ìš©í•œ ì‹œë¦¬ì–¼ í†µì‹ 
 *
 */
 
@@ -21,7 +21,7 @@ unsigned char uart_scanf(FILE * stream)
 	return uart_getc();
 }
 
-//»õ·Î¿î standard io¸¦ ÁöÁ¤ÇÑ´Ù.
+//ìƒˆë¡œìš´ standard ioë¥¼ ì§€ì •í•œë‹¤.
 static FILE std_output = FDEV_SETUP_STREAM(uart_printf, NULL, _FDEV_SETUP_WRITE);
 static FILE std_input = FDEV_SETUP_STREAM(NULL, uart_scanf, _FDEV_SETUP_READ);
 
@@ -31,8 +31,8 @@ int main(void) {
 	"\r\nWelcome! Serial communication world!!\r\n Good Luck\r\n";
 	char echo[] = "HKNU >> ";
 
-	//stdout°ú stdin¿¡ »ç¿ëÀÚ°¡ Á¤ÀÇÇÑ ÇÔ¼ö·Î ¼³Á¤
-	//¾Æ·¡ 2ÁÙÀº main ÇÔ¼ö ¹Û¿¡ ÀÛ¼ºÇÏ¸é ¿À·ù°¡ ¹ß»ıÇÏ¹Ç·Î ÁÖÀÇ
+	//stdoutê³¼ stdinì— ì‚¬ìš©ìê°€ ì •ì˜í•œ í•¨ìˆ˜ë¡œ ì„¤ì •
+	//ì•„ë˜ 2ì¤„ì€ main í•¨ìˆ˜ ë°–ì— ì‘ì„±í•˜ë©´ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ë¯€ë¡œ ì£¼ì˜
 	stdout = &std_output;
 	stdin = &std_input;
 
@@ -45,13 +45,14 @@ int main(void) {
 	printf("%s", echo);
 
 	for (;;) {
-		//recieved_byte = uart_getc();
 		scanf("%c", &recieved_byte);
 		_delay_ms(50);
 		//uart_putc(recieved_byte);
-		printf("%c", recieved_byte);
 		if( recieved_byte==0x0D)
 			printf("%s", echo);
+		else if (recieved_byte!=0)
+			printf("%c", recieved_byte);
+
 	}
 	return 0; // never reached
 }
