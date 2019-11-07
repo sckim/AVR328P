@@ -2,6 +2,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/wdt.h>
+#include <util/delay.h>
 
 void WDT_off(void) {
 	cli();
@@ -16,7 +17,7 @@ void WDT_off(void) {
 	sei();
 }
 
-void WDT_Prescaler_Change(void) {
+void WDT_Prescaler_Change(int time) {
 	// Turn off global interrupt
 	cli();
 
@@ -26,25 +27,36 @@ void WDT_Prescaler_Change(void) {
 	WDTCSR |= (1 << WDCE) | (1 << WDE);
 
 	/* Set new prescaler(time-out) value = 64K cycles (~0.5 s) */
-	WDTCSR = (1 << WDIE) | (1 << WDP2) | (1 << WDP0);
+//	WDTCSR = (1 << WDIE) | (1 << WDP2) | (1 << WDP0);
 //or
-//	wdt_enable(WDTO_500MS);
-//	WDTCSR = (1 << WDIE);
+	wdt_enable(time);
+	WDTCSR = (1 << WDIE);
 
 // Turn on global interrupt
 	sei();
 }
 
+
 int main(void) {
-	WDT_Prescaler_Change();
+	WDT_Prescaler_Change(WDTO_500MS);
 
-	DDRB |= _BV(5);
-	PORTB |= 0b00000000;
+	DDRD |= _BV(7);  // watchdog timer 인터럽트
+	DDRD |= _BV(6);  // timer reset 상태
+	PORTD |= 0b00000000;
 
-	while (1)
-		;
+//	PORTD = 0;
+//	PORTD |= _BV(6);
+//	_delay_ms(100);
+//	PORTD = 0;
+
+	while (1){
+		_delay_ms(600);
+		//_delay_ms(300);
+		PORTD ^= _BV(6);
+		wdt_reset();
+	}
 }
 
 ISR(WDT_vect) {
-	PORTB ^= _BV(5);
+	PORTD ^= _BV(7);
 }
