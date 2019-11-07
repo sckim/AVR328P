@@ -89,9 +89,9 @@ void Timer0Prescaler(unsigned int scale) {
 
 ISR (TIMER0_OVF_vect) {
 	PORTB ^= _BV(PB5);
-	_delay_us(1000);	//100us
-	PORTB &= ~_BV(PB5);
-	TCNT0 = 0;  //Period가 16.25msec이기 때문에
+//	_delay_us(1000);	//100us
+//	PORTB &= ~_BV(PB5);
+	TCNT0 = 126;  //Period가 16.25msec이기 때문에
 }
 
 int main(void) {
