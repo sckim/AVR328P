@@ -44,14 +44,17 @@ int main(void) {
 	DDRD |= _BV(6);  // timer reset 상태
 	PORTD |= 0b00000000;
 
-//	PORTD = 0;
-//	PORTD |= _BV(6);
-//	_delay_ms(100);
-//	PORTD = 0;
+	PORTD |= _BV(6);
+	_delay_ms(10);
+	PORTD = 0;
+	_delay_ms(10);
+	PORTD |= _BV(6);
+	_delay_ms(10);
+	PORTD = 0;
+	_delay_ms(10);
 
 	while (1){
 		_delay_ms(600);
-		//_delay_ms(300);
 		PORTD ^= _BV(6);
 		wdt_reset();
 	}
