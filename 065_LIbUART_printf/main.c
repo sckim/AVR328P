@@ -49,7 +49,7 @@ int main(void) {
 		_delay_ms(50);
 		//uart_putc(recieved_byte);
 		if( recieved_byte==0x0D)
-			printf("%s", echo);
+			printf("\r\n%s", echo);
 		else if (recieved_byte!=0)
 			printf("%c", recieved_byte);
 

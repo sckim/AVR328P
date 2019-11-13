@@ -88,15 +88,15 @@ void Timer0Prescaler(unsigned int scale) {
 }
 
 ISR (TIMER0_OVF_vect) {
-	PORTB ^= _BV(PB5);
-	_delay_us(1000);	//100us
-	PORTB &= ~_BV(PB5);
-	TCNT0 = 0;  //Period가 16.25msec이기 때문에
+	PORTD ^= _BV(PD5);
+//	_delay_us(1000);	//100us
+//	PORTB &= ~_BV(PB5);
+	TCNT0 = 126;  //Period가 16.25msec이기 때문에
 }
 
 int main(void) {
 	// PD6 is now an output
-	DDRB |= (1 << PB5);
+	DDRD |= (1 << PD5);
 
 	cli();
 	TIMSK0 |= (1<<TOIE0);    // Timer0 오버플로 인터럽트 mask enable
