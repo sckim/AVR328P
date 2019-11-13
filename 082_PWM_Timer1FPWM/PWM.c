@@ -199,15 +199,13 @@ void Timer1Prescaler(unsigned int scale) {
 }
 
 int main(void) {
-	int deg = 125;
+	int deg = 125;  // 0.5msec, duty ratio = 5%
 
 	ICR1 = 2500;
 	// set TOP to 16bit
 
 	OCR1A = deg;
-	// set PWM for 25% duty cycle @ 16bit
 	OCR1B = deg;
-	// set PWM for 75% duty cycle @ 16bit
 
 	// set Fast PWM mode using ICR1 as TOP
 	Timer1Mode(FPWM_ICR1);
@@ -225,9 +223,9 @@ int main(void) {
 		OCR1B = deg;  // same direction
 		//OCR1B = 625-deg+125; // opposite direction
 
-		if( deg > 625 )
+		if( deg > 625 )  // 2.5msec
 			inc = -1;
-		if( deg < 125 )
+		if( deg < 125 )  // 0.5msec
 			inc = +1;
 
 		_delay_ms(5);
