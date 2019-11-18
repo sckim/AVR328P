@@ -228,6 +228,6 @@ int main(void) {
 		if( deg < 125 )  // 0.5msec
 			inc = +1;
 
-		_delay_ms(5);
+		_delay_ms(10);
 	}
 }
