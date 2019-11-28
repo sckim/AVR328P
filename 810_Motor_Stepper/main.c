@@ -87,12 +87,12 @@ void runMotor(int steps, int dir)
 	if(dir){
 		for(i=0; i<steps; i++){
 			stepMotor(i%8);
-			_delay_ms(200);
+			_delay_ms(1);
 		}
 	} else	{
 		for(i=steps; i>=0; i--){
 			stepMotor(i%8);
-			_delay_ms(200);
+			_delay_ms(1);
 		}
 	}
 }
