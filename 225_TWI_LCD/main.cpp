@@ -36,11 +36,13 @@ int main(void)
 	while (1) {
 		if (blinking) {
 			lcd.clear();
+			_delay_ms(10);
 			lcd.printstr("No cursor blink");
 			lcd.noBlink();
 			blinking = false;
 		} else {
 			lcd.clear();
+			_delay_ms(10);
 			lcd.printstr("Cursor blink");
 			lcd.blink();
 			blinking = true;
