@@ -12,7 +12,7 @@
 #include "PCF8574.h"
 
 //0x38
-PCF8574 PCF_01(0x40);
+PCF8574 PCF_01(0x38);
 
 int main(void) {
 
