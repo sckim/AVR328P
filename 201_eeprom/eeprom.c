@@ -4,6 +4,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 #include <avr/eeprom.h>
+#include <stdio.h>
 #include "uart.h"
 
 volatile uint16_t eepromaddress;
@@ -16,7 +17,7 @@ void EEPROM_write(void) {
 	ch = 0x0;
 
 	for (addr = start; addr < start+30; addr++) {
-//		eeprom_write_byte((uint8_t*) addr, ch);
+		//		eeprom_write_byte((uint8_t*) addr, ch);
 		eeprom_update_byte((uint8_t*) addr, ch);
 		printf("W: %d @ %d\r\n", ch++, addr);
 	}
@@ -38,13 +39,13 @@ int main(void) {
 	uart_init(9600UL);
 	DDRB |= _BV(5);
 
-//	while(1){
-//	PORTB ^= _BV(5);
-//		printf("Current EEprom data\r");
-//		readEEPROM();
-		EEPROM_write();
-//		printf("New EEprom data\r");
-		EEPROM_read();
-//		_delay_ms(100);
-//	}
+	//	while(1){
+	//	PORTB ^= _BV(5);
+	//		printf("Current EEprom data\r");
+	//		readEEPROM();
+	EEPROM_write();
+	//		printf("New EEprom data\r");
+	EEPROM_read();
+	//		_delay_ms(100);
+	//	}
 }
