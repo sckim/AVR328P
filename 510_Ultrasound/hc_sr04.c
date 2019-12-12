@@ -29,7 +29,7 @@
 
 char str[80];
 
-//»õ·Î¿î standard io¸¦ ÁöÁ¤ÇÑ´Ù.
+//ìƒˆë¡œìš´ standard ioë¥¼ ì§€ì •í•œë‹¤.
 static FILE std_output = FDEV_SETUP_STREAM(uart_putc, NULL, _FDEV_SETUP_WRITE);
 
 int main(void) {
@@ -67,11 +67,11 @@ int main(void) {
 		loop_until_bit_is_clear(PinIn, BUTTON);
 		duration = TCNT1 * 4;  // 1clock = 4us because of using /64 clock source
 
-		// us / 58 = 1cm
-		// 1cm = 58us
+		// 340m/sec = 0.034/usec
+		// (t/2)*0.034 = t*0.017
 
 		printf("\r\nTime: %d[usec]", duration );
-		distance = (duration / 58.0);
+		distance = (duration * 0.017);
 		if (distance >= 400 || distance <= 2) {
 			printf("\r\nOut of range\r\n");
 		} else {
