@@ -8,8 +8,8 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                // "D:/Github/AVR328P/010_Blink/include",
-                "D:/Github/AVR328P/010_Blink/src",
+                "D:/Github/Atmega328P/010_Blink/include",
+                "D:/Github/Atmega328P/010_Blink/src",
                 "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/variants/standard",
                 "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
@@ -22,8 +22,8 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    // "D:/Github/AVR328P/010_Blink/include",
-                    "D:/Github/AVR328P/010_Blink/src",
+                    "D:/Github/Atmega328P/010_Blink/include",
+                    "D:/Github/Atmega328P/010_Blink/src",
                     "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/variants/standard",
                     "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
