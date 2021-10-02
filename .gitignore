@@ -18,8 +18,12 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# =========================
-# Operating System Files
-# =========================
-/060_UART/
-900_Wachdog/AVR328P_Basic.pdsprj.SCKIM.Soochan Kim.workspace
+*.hex
+*.elf
+*.o
+*.d
+*.srec
+*.map
+*.eep
+*.lss
+*.mk
