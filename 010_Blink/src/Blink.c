@@ -15,8 +15,10 @@ int main(void) {
 
 	while (1) {
 		PORTB = 0xFF;
+		//PORTB |= (1<<PB5);
 		_delay_ms(1000);
 		PORTB = 0x00;
+		//PORTB &= ~(1<<PB5);
 		_delay_ms(1000);
 	}
 	return 0;
