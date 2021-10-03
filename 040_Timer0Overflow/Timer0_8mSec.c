@@ -1,11 +1,12 @@
 /*************************************
- * Purpose: Timer0À» ÀÌ¿ëÇÏ¿© 1ÃÊ¸¶´Ù overflow
- * interrupt¿¡ ÀÇÇÑ LED Shift
+ * Purpose: Timer0ì„ ì´ìš©í•˜ì—¬ 1ì´ˆë§ˆë‹¤ overflow
+ * interruptì— ì˜í•œ LED Shift
  *
  * TCCR0A
  * TCCR0B
  * TCNT0
  *************************************/
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
