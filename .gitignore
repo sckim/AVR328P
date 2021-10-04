@@ -4,6 +4,13 @@
 .vscode/launch.json
 .vscode/ipch
 
+#eclipse 파일
+.metadata
+.cproject
+.project
+.settings
+Debug
+
 # Windows thumbnail cache files
 Thumbs.db
 ehthumbs.db
