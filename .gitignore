@@ -40,3 +40,7 @@ $RECYCLE.BIN/
 *.eep
 *.lss
 *.mk
+*.workspace
+*.pdsbak
+*.code-workspace
+
