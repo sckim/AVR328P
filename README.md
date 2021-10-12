@@ -1,6 +1,6 @@
 # Atmega328P_examples
-Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예제이며, 추후 수정 예정)
-강의 자료와 소스 코드는 계속 올리도록 하겠습니다. 회로도는 Proteus ver. 8.x 이상에서 볼 수 있습니다.
+Microcontroller Atmega 328P와 관련된 예제입니다.
+강의 자료와 소스 코드는 계속 올리도록 하겠습니다. 회로도는 Proteus ver. 8.10 이상에서 볼 수 있습니다.
 
 ## 강의 개요
 + 마이크로컨트롤러
@@ -10,13 +10,13 @@ Microcontroller Atmega 328P와 관련된 예제입니다. (현재에는 328P 예
 ### 1주차: 마이크로컨트롤러란? 
 
 ### 2주차: 개발환경구축
-+ AVR Studio ([Ver 7](http://www.microchip.com/mplab/avr-support/atmel-studio-7), [Ver 4.19](https://www.dropbox.com/s/3c2vubam8lwj42c/AvrStudio4Setup.exe?dl=0))
-+ Eclipse for AVR ([Neon](https://www.eclipse.org/downloads/packages/release/neon/3/eclipse-ide-cc-developers), [AVR Plugin 설치](https://marketplace.eclipse.org/category/free-tagging/avr))
-+ [AVRToolchain](https://www.dropbox.com/s/7j8wxu1b2sp6b6n/AVR-Toolchain_330710.exe?dl=0)
-+ [WinAVR](https://sourceforge.net/projects/winavr/files/) - avr gcc compiler
-+ [Training Board Kit (Atmega128L용)](https://docs.google.com/document/d/1z8ZOeDaLLHn7CCoW8pkEYocl6X6kjT0bNDkCtDhy2is/edit#heading=h.ewk21ulbo3a9) - 학교에 있는 실습 키트 (요청시 권한 부여)
-+ [필수프로그램](https://www.dropbox.com/s/invxn9zygupyc5h/Core.zip?dl=0) - AVRStudio4.19, AVR-Toolchain, WinAVR, msys-1.0.dll을 한꺼번에 받을 수 있습니다.
-+ 개발에 도움이 되는 유틸리티 - [Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), [ISP-Pololu programmer](https://www.dropbox.com/s/yxbxef388oqb1lm/pololu-usb-avr-programmer-v2-1.0.1-win.msi?dl=0)
++ AVR Studio ([Ver 7](http://www.microchip.com/mplab/avr-support/atmel-studio-7)) - Assembly나 Disassembly Debug시 추천
++ Visual Studio Code + PlatformIO ([Vsiual Studio Code](https://code.visualstudio.com/), [PlatformIO extension](https://platformio.org/)) - 요즘 가장 핫한 개발 환경
++ Eclipse for AVR ([Neon](https://www.eclipse.org/downloads/packages/release/neon/3/eclipse-ide-cc-developers), [AVR Plugin 설치](https://marketplace.eclipse.org/category/free-tagging/avr)) - 구관이 명관
++ [AVRToolchain](https://drive.google.com/file/d/1cYElt8QyCGPUV7tvR_Hv1udH1gEq8DAm/view?usp=sharing) - avrgcc 컴파일러
++ AVRStudio4.19, AVR-Toolchain, WinAVR, msys-1.0.dll을 한꺼번에 받을 수 있습니다.([다운로드](https://www.dropbox.com/s/invxn9zygupyc5h/Core.zip?dl=0))
++ 개발에 도움이 되는 유틸리티 ([Putty](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html), [ISP-Pololu programmer](https://www.dropbox.com/s/yxbxef388oqb1lm/pololu-usb-avr-programmer-v2-1.0.1-win.msi?dl=0))
++ 학교에 있는 실습 키트 ([Training Board Kit (Atmega128L용)](https://docs.google.com/document/d/1z8ZOeDaLLHn7CCoW8pkEYocl6X6kjT0bNDkCtDhy2is/edit#heading=h.ewk21ulbo3a9), [Arduino UNO](https://store.arduino.cc/products/arduino-uno-rev3)) 
 
 ### 3주차: 범용 입/출력
 + [GPIO 출력](https://github.com/sckim/AVR328P/blob/master/010_Blink/Blink.c), [회로도](https://github.com/sckim/AVR328P/blob/master/010_Blink/AVR328P_LCD_7Seg_Terminal.DSN)
