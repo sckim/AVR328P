@@ -4,6 +4,9 @@
 .vscode/launch.json
 .vscode/ipch
 
+.vs
+*.xml
+
 #eclipse 파일
 .metadata
 .cproject
