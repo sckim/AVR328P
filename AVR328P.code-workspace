@@ -4,8 +4,8 @@
 			"path": "."
 		},
 		{
-			"name": "ADC_map",
-			"path": "ADC_map"
+			"name": "050_ADC",
+			"path": "050_ADC"
 		}
 	],
 	"settings": {}

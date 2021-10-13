@@ -1,8 +1,14 @@
-#include <Arduino.h>
+#include <avr/io.h>
+#include <util/delay.h>
+#include <stdlib.h>
 
 #define FOSC 16000000 // Clock Speed
 
 char str[80];
+
+long map(long x, long in_min, long in_max, long out_min, long out_max) {
+	return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
 void InitADC() {
 	// For Aref=AVcc;
@@ -71,13 +77,13 @@ void dispSeg(unsigned char ch)
   PORTD |= (ch<<4);
 }
 
- // ÇÉ ÇÏ³ªÇÏ³ª¸¦ °³º°ÀûÀ¸·Î Á¦¾îÇÏ¿© ÇÁ·Î±×·¥ÇÏ´Â ¿¹
+ // ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½Î±×·ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
 void setup()
 {
   /*
    for(int i=4; i<8; i++) {
-  	pinMode(i, OUTPUT);  // pinÀÇ ÀÔÃâ·Â »óÅÂ °áÁ¤
-  	digitalWrite(i, LOW); // ÇöÀç pin Ãâ·ÂÀ» high
+  	pinMode(i, OUTPUT);  // pinï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+  	digitalWrite(i, LOW); // ï¿½ï¿½ï¿½ï¿½ pin ï¿½ï¿½ï¿½ï¿½ï¿½ high
   }*/
   // Initialize GPIO for 7 segments
   for(int i=4; i<8; i++){
@@ -106,5 +112,14 @@ void loop()
   USART_Puts(itoa(map(adc_value, 0, 1023, 0, 500), str, 10));
   USART_Puts("[V]\r\n");
 
-  delay(500);   
+  _delay_ms(500);   
+}
+
+int main(void)
+{
+  setup();
+
+  while(1){
+    loop();
+  }
 }

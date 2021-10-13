@@ -8,38 +8,22 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "D:/Github/AVR328P/010_Blink/include",
-                "D:/Github/AVR328P/010_Blink/src",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/cores/arduino",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/variants/standard",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/HID/src",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "D:/0_Github/AVR328P/010_Blink/include",
+                "D:/0_Github/AVR328P/010_Blink/src",
                 ""
             ],
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "D:/Github/AVR328P/010_Blink/include",
-                    "D:/Github/AVR328P/010_Blink/src",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/cores/arduino",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/variants/standard",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/HID/src",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
-                    "C:/Users/drsoo/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "D:/0_Github/AVR328P/010_Blink/include",
+                    "D:/0_Github/AVR328P/010_Blink/src",
                     ""
                 ]
             },
             "defines": [
-                "PLATFORMIO=50200",
-                "ARDUINO_AVR_UNO",
                 "F_CPU=16000000L",
-                "ARDUINO_ARCH_AVR",
-                "ARDUINO=10808",
+                "PLATFORMIO=50201",
+                "ARDUINO_AVR_UNO",
                 "__AVR_ATmega328P__",
                 ""
             ],
