@@ -4,12 +4,8 @@
 			"path": "."
 		},
 		{
-			"name": "005_asmBlink",
-			"path": "005_asmBlink"
-		},
-		{
-			"name": "043_Timer0_CTC_int",
-			"path": "043_Timer0_CTC_int"
+			"name": "ADC_map",
+			"path": "ADC_map"
 		}
 	],
 	"settings": {}
