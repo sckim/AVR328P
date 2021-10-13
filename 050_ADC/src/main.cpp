@@ -77,13 +77,13 @@ void dispSeg(unsigned char ch)
   PORTD |= (ch<<4);
 }
 
- // �� �ϳ��ϳ��� ���������� �����Ͽ� ���α׷��ϴ� ��
+// 핀 하나하나를 개별적으로 제어하여 프로그램하는 예
 void setup()
 {
   /*
    for(int i=4; i<8; i++) {
-  	pinMode(i, OUTPUT);  // pin�� ����� ���� ����
-  	digitalWrite(i, LOW); // ���� pin ����� high
+  	pinMode(i, OUTPUT);  // pin의 입출력 상태 결정
+  	digitalWrite(i, LOW); // 현재 pin 출력을 high
   }*/
   // Initialize GPIO for 7 segments
   for(int i=4; i<8; i++){
@@ -112,7 +112,7 @@ void loop()
   USART_Puts(itoa(map(adc_value, 0, 1023, 0, 500), str, 10));
   USART_Puts("[V]\r\n");
 
-  _delay_ms(500);   
+  _delay_ms(50);
 }
 
 int main(void)

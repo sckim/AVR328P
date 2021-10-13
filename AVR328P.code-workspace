@@ -4,8 +4,8 @@
 			"path": "."
 		},
 		{
-			"name": "050_ADC",
-			"path": "050_ADC"
+			"name": "060_UART",
+			"path": "060_UART"
 		}
 	],
 	"settings": {}
