@@ -9,6 +9,10 @@ Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "05_main", "05_main\05_main.
 EndProject
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "050_ADC", "050_ADC\050_ADC.cppproj", "{4728E5AC-AAAC-4C93-828F-E0EEEFC5B7ED}"
 EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "027_Interrupt", "027_Interrupt\027_Interrupt.cppproj", "{2D41EC47-A788-4F6F-972F-CFD46A11BF51}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "028_PCInterrupt", "028_PCInterrupt\028_PCInterrupt.cppproj", "{1823137C-529A-4F50-BD68-967291BF8B14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -27,6 +31,14 @@ Global
 		{4728E5AC-AAAC-4C93-828F-E0EEEFC5B7ED}.Debug|AVR.Build.0 = Debug|AVR
 		{4728E5AC-AAAC-4C93-828F-E0EEEFC5B7ED}.Release|AVR.ActiveCfg = Release|AVR
 		{4728E5AC-AAAC-4C93-828F-E0EEEFC5B7ED}.Release|AVR.Build.0 = Release|AVR
+		{2D41EC47-A788-4F6F-972F-CFD46A11BF51}.Debug|AVR.ActiveCfg = Debug|AVR
+		{2D41EC47-A788-4F6F-972F-CFD46A11BF51}.Debug|AVR.Build.0 = Debug|AVR
+		{2D41EC47-A788-4F6F-972F-CFD46A11BF51}.Release|AVR.ActiveCfg = Release|AVR
+		{2D41EC47-A788-4F6F-972F-CFD46A11BF51}.Release|AVR.Build.0 = Release|AVR
+		{1823137C-529A-4F50-BD68-967291BF8B14}.Debug|AVR.ActiveCfg = Debug|AVR
+		{1823137C-529A-4F50-BD68-967291BF8B14}.Debug|AVR.Build.0 = Debug|AVR
+		{1823137C-529A-4F50-BD68-967291BF8B14}.Release|AVR.ActiveCfg = Release|AVR
+		{1823137C-529A-4F50-BD68-967291BF8B14}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

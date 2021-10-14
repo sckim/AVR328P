@@ -2,10 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"name": "028_PCInterrupt",
-			"path": "028_PCInterrupt"
 		}
 	],
 	"settings": {}
