@@ -31,18 +31,18 @@ void dispSeg(unsigned char ch) {
 	//  digitalWrite(i+4, bitRead(ch, i));
 	int temp;
 
-	// »óÀ§ 4ºñÆ®¸¸ update
+	// ìƒìœ„ 4ë¹„íŠ¸ë§Œ update
 	temp = PORTD & 0x0F;
 	PORTD = ((ch << 4) | temp);
 }
 
-// ÇÉ ÇÏ³ªÇÏ³ª¸¦ °³º°ÀûÀ¸·Î Á¦¾îÇÏ¿© ÇÁ·Î±×·¥ÇÏ´Â ¿¹
+// í•€ í•˜ë‚˜í•˜ë‚˜ë¥¼ ê°œë³„ì ìœ¼ë¡œ ì œì–´í•˜ì—¬ í”„ë¡œê·¸ë¨í•˜ëŠ” ì˜ˆ
 void setup() {
-	// PORTDÀÇ »óÀ§ 4ºñÆ®¸¦ Ãâ·ÂÀ¸·Î
+	// PORTDì˜ ìƒìœ„ 4ë¹„íŠ¸ë¥¼ ì¶œë ¥ìœ¼ë¡œ
 	//  DDRD |= 0xF0; or
 	DDRD |= (_BV(PD7) | _BV(PD6) | _BV(PD5) | _BV(PD4));
 
-	// ½ºÀ§Ä¡°¡ ÀÖ´Â Æ÷Æ®¸¦ pull up ÀúÇ× È°¼ºÈ­
+	// ìŠ¤ìœ„ì¹˜ê°€ ìˆëŠ” í¬íŠ¸ë¥¼ pull up ì €í•­ í™œì„±í™”
 	//  pinMode(SW_A, INPUT_PULLUP);
 	//  pinMode(SW_B, INPUT_PULLUP);
 	PORTB |= (_BV(SW_A) | _BV(SW_B));

@@ -4,8 +4,8 @@
 			"path": "."
 		},
 		{
-			"name": "060_UART",
-			"path": "060_UART"
+			"name": "028_PCInterrupt",
+			"path": "028_PCInterrupt"
 		}
 	],
 	"settings": {}
