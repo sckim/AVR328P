@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>{1823137c-529a-4f50-bd68-967291bf8b14}</ProjectGuid>
+    <ProjectGuid>{2d41ec47-a788-4f6f-972f-cfd46a11bf51}</ProjectGuid>
     <avrdevice>ATmega328P</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>028_PCInterrupt</AssemblyName>
-    <Name>028_PCInterrupt</Name>
-    <RootNamespace>028_PCInterrupt</RootNamespace>
+    <AssemblyName>027_Interrupt</AssemblyName>
+    <Name>027_Interrupt</Name>
+    <RootNamespace>027_Interrupt</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -154,9 +154,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="src\PinChangeInt.cpp">
+    <Compile Include="src\Interrupt.cpp">
       <SubType>compile</SubType>
-      <Link>PinChangeInt.cpp</Link>
+      <Link>Interrupt.cpp</Link>
     </Compile>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
