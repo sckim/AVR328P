@@ -9,7 +9,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-int main(void) {
+int main1(void) {
 
 #if defined (__AVR_ATmega128__)
 // 컴파일 환경에서 uC가 128로 설정했을 때 실행

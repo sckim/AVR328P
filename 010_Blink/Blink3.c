@@ -1,7 +1,7 @@
 /*
  * 10_Blink.c
  *
- * Created: 2017-08-07 ¿ÀÈÄ 5:12:02
+ * Created: 2017-08-07 ï¿½ï¿½ï¿½ï¿½ 5:12:02
  * Author : Soochan Kim
  */
 
@@ -11,7 +11,7 @@
 //#define sbi(sfr, bit) _SFR_BYTE(sfr) |= _BV(bit)
 //#define cbi(sfr, bit) _SFR_BYTE(sfr) &= ~_BV(bit)
 
-int main(void) {
+int main1(void) {
 	sbi(DDRB, PB5);
 
 	while (1) {

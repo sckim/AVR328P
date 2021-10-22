@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-int main(void) {
+int main1(void) {
 	
 	// PortB에서 PB0핀의 기능을 출력으로 설정
 	DDRB |= 0x01;
