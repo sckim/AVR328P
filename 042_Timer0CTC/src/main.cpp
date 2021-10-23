@@ -1,19 +1,17 @@
 /*************************************
- * Purpose: Timer0을 이용하여 1초마다 overflow
- * interrupt에 의한 LED Shift
  *
+ * TIMSK0
  * TCCR0A
  * TCCR0B
- * TCNT0
+ * OCR0A
  *************************************/
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
 // from TCNT = (CS / 16000000 ) * (256-x) =10msec
 // x = time * (16000000/CS)
 // 15625*8msec = 125
-#define cDelay 256-125
+#define cDelay 125
 
 volatile int sec = 0;
 volatile int msec8 = 0;
@@ -26,18 +24,22 @@ int main(void) {
 
 	PORTD = (sec << 4) + msec8;
 
-	TCCR0A = 0;
+	TCCR0A |= (1<<WGM01);
 	//CS0[2:0]
 	TCCR0B |= (1 << CS02);	// Clock/1024
 	TCCR0B |= (1 << CS00);	// Clock/1024
 
-	TCNT0 = cDelay;
+	// Toggle on Compare Match
+	TCCR0A |= _BV(COM0A1);
+	//TCCR0A |= _BV(COM0A0);
+	TCCR0A |= _BV(COM0B1);
+
+	OCR0A = cDelay;
 	while (1) {
 		// Check overflow flag
-		if (bit_is_set(TIFR0, TOV0)) {
+		if (bit_is_set(TIFR0, OCF0A)) {
 			// reset the overflow flag
-			TIFR0 |= _BV(TOV0);
-			TCNT0 = cDelay;
+			TIFR0 |= _BV(OCF0A);
 
 			msec8++;
 			if (msec8 == 125) {
@@ -45,7 +47,9 @@ int main(void) {
 				msec8 = 0;
 				s10 = sec / 10;
 				s1 = sec % 10;
-				PORTD = (s10 << 4) + s1;
+				//PORTD = (s10 << 4) + s1;
+				PORTD = s1;
+
 			}
 			if (sec == 99) {
 				sec = 0;

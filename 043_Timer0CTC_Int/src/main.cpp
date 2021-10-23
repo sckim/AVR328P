@@ -17,15 +17,17 @@ volatile int msec8 = 0;
 
 //SIGNAL (TIMER0_COMPA_vect) {
 ISR (TIMER0_COMPA_vect) {
-	char s10, s1;
+	//char s10;
+	char s1;
 
 	msec8++;
 	if (msec8 == 125) {
 		sec++;
 		msec8 = 0;
-		s10 = sec/10;
+		//s10 = sec/10;
 		s1 = sec%10;
-		PORTD = (s10<<4) + s1;
+		//PORTD = (s10<<4) + s1;
+		PORTD = s1;
 	}
 	if (sec == 99) {
 		sec = 0;
@@ -37,18 +39,23 @@ int main(void) {
 	DDRD = 0xFF;
 	DDRB |= _BV(PB5);
 
-	PORTD = (sec << 4) + msec8;
+	PORTD = 0;
+
+	// Toggle on Compare Match
+	TCCR0A |= _BV(COM0A0);
+	//TCCR0A |= _BV(COM0A1);
+	TCCR0A |= _BV(COM0B0);
 
 	cli();
 
 	TIMSK0 |= (1 << OCIE0A);    // Compare match 인터럽트 에이블
-	TCCR0A |= (1<< WGM01);	    // CTC mode
+	TCCR0A |= (1 << WGM01);	    // CTC mode
 	//CS0[2:0]
 	TCCR0B |= (1 << CS02);	// Clock/1024
 	TCCR0B |= (1 << CS00);	// Clock/1024
+	OCR0A = cDelay;
 
 	sei();
-	OCR0A = cDelay;
 	while (1) {
 	}
 }
