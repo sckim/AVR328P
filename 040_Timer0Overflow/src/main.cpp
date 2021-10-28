@@ -45,7 +45,8 @@ int main(void) {
 				msec8 = 0;
 				s10 = sec / 10;
 				s1 = sec % 10;
-				PORTD = (s10 << 4) + s1;
+				//PORTD = (s10 << 4) + s1;
+				PORTD = s1<<4;
 			}
 			if (sec == 99) {
 				sec = 0;

@@ -24,6 +24,8 @@ void setup(void) {
 		PORTD |= _BV(i);
 	}
 
+	DDRB |= _BV(PB5);
+
 	cli();
 	// SREG &= ~_BV(7);
 	TIMSK0 |= (1 << TOIE0);    // Timer0 오버플로 인터럽트 에이블
@@ -51,6 +53,7 @@ ISR (TIMER0_OVF_vect) {
 	TCNT0 = cDelay;
 
 	msec8++;
+	PORTB |=
 	if (msec8 == 125) {
 		msec8 = 0;
 		dispSeg(sec++);

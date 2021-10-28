@@ -108,10 +108,12 @@ int main(void) {
 	SpeedA(20);
 	SpeedB(20);
 
-	PCMSK2 |= (1 << PCINT21); // set PCINT0 to trigger an interrupt on state change 	SREG = 0b10000000;
-
-	// set PCIE0 to enable PCMSK0 scan
+  // set PCINT0 to trigger an interrupt on state change 	SREG = 0b10000000;
+	PCMSK2 |= (1 << PCINT21); 
+	
+  // set PCIE0 to enable PCMSK0 scan
 	PCICR |= (1 << PCIE2);
+  
 	sei();
 	while (1) {
 		SpeedA(map(ReadADC(0), 0, 1023, 0, 100));
