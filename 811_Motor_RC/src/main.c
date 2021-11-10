@@ -1,9 +1,7 @@
 /*
- * Library¸¦ ÀÌ¿ëÇÑ ½Ã¸®¾ó Åë½Å
+ * Libraryë¥¼ ì´ìš©í•œ ì‹œë¦¬ì–¼ í†µì‹ 
  *
  */
-
-#define F_CPU 16000000UL
 
 #include <avr/io.h>
 #include <stdio.h>
@@ -21,19 +19,36 @@ unsigned char uart_scanf(FILE * stream) {
 	return uart_getc();
 }
 
-//»õ·Î¿î standard io¸¦ ÁöÁ¤ÇÑ´Ù.
+// Cë¡œ êµ¬í˜„í•  ë•Œ
+//ìƒˆë¡œìš´ standard ioë¥¼ ì§€ì •í•œë‹¤.
 static FILE std_output = FDEV_SETUP_STREAM(uart_printf, NULL, _FDEV_SETUP_WRITE);
 static FILE std_input = FDEV_SETUP_STREAM(NULL, uart_scanf, _FDEV_SETUP_READ);
+
 
 long map(long x, long in_min, long in_max, long out_min, long out_max) {
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
+const char intro[] = "\r\nWelcome! Set RC servo control through UART";
+const char echo[] = "\r\nEnter new deg: ";
+
 int main(void) {
-	const char intro[] = "\r\nWelcome! Set RC servo control through UART";
-	const char echo[] = "\r\nEnter new deg: ";
 	char str[10];
 
+	//stdoutê³¼ stdinì— ì‚¬ìš©ìê°€ ì •ì˜í•œ í•¨ìˆ˜ë¡œ ì„¤ì •
+	//ì•„ë˜ 2ì¤„ì€ main í•¨ìˆ˜ ë°–ì— ì‘ì„±í•˜ë©´ ì˜¤ë¥˜ê°€ ë°œìƒí•˜ë¯€ë¡œ ì£¼ì˜
+	stdout = &std_output;
+	stdin = &std_input;
+
+/*  
+  	FILE *std_inout;
+
+  	std_inout->put = uart_printf;
+  	std_inout->get = uart_scanf;
+  	std_inout->flags = _FDEV_SETUP_RW;
+
+  	stdout = stdin = std_inout;
+*/
 	// Period of PWM
 	// 1/16000000 * 64 * 5000 = 20msec
 	ICR1 = 5000;
@@ -48,11 +63,6 @@ int main(void) {
 	// set none-inverting mode
 	Timer1OutputA(NonInvert);
 	Timer1OutputB(NonInvert);
-
-	//stdout°ú stdin¿¡ »ç¿ëÀÚ°¡ Á¤ÀÇÇÑ ÇÔ¼ö·Î ¼³Á¤
-	//¾Æ·¡ 2ÁÙÀº main ÇÔ¼ö ¹Û¿¡ ÀÛ¼ºÇÏ¸é ¿À·ù°¡ ¹ß»ıÇÏ¹Ç·Î ÁÖÀÇ
-	stdout = &std_output;
-	stdin = &std_input;
 
 	uart_init(UART_BAUD_SELECT(9600, 16000000L));
 	sei();
