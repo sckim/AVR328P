@@ -53,7 +53,7 @@ ISR (TIMER0_OVF_vect) {
 	TCNT0 = cDelay;
 
 	msec8++;
-	PORTB |=
+	PORTB ^= _BV(PB5);
 	if (msec8 == 125) {
 		msec8 = 0;
 		dispSeg(sec++);

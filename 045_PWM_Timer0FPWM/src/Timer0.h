@@ -8,12 +8,75 @@
 #ifndef TIMER0_H_
 #define TIMER0_H_
 
-#include <avr/interrupt.h>
-
 #define Normal 	0
 #define PWM		1
 #define CTC		2
 #define FPWM	3
+
+#define Normal 		0
+#define Toggle		1
+#define NonInvert	2
+#define Invert		3
+
+void Timer0OutputA(unsigned char mode) {
+	//OC0A output
+	DDRD |= (1 << DDD6);
+
+	// COM01 COM00
+	// 00: Normal
+	// 01: Toggle OC0 on compare match
+	// 10: Clear OC0 on compare match
+	// 11: Set OC0 on compare match
+
+	switch (mode) {
+	case Normal:
+		TCCR0A &= ~(1 << COM0A1);
+		TCCR0A &= ~(1 << COM0A0);
+		break;
+	case Toggle:
+		TCCR0A &= ~(1 << COM0A1);
+		TCCR0A |= (1 << COM0A0);
+		break;
+	case NonInvert:
+		TCCR0A |= (1 << COM0A1);
+		TCCR0A &= ~(1 << COM0A0);
+		break;
+	case Invert:
+		TCCR0A |= (1 << COM0A1);
+		TCCR0A |= (1 << COM0A0);
+		break;
+	}
+}
+
+void Timer0OutputB(unsigned char mode) {
+	//OC0B output
+	DDRD |= (1 << DDD5);
+
+	// COM01 COM00
+	// 00: Normal
+	// 01: Toggle OC0 on compare match
+	// 10: Clear OC0 on compare match
+	// 11: Set OC0 on compare match
+
+	switch (mode) {
+	case Normal:
+		TCCR0A &= ~(1 << COM0B1);
+		TCCR0A &= ~(1 << COM0B0);
+		break;
+	case Toggle:
+		TCCR0A &= ~(1 << COM0B1);
+		TCCR0A |= (1 << COM0B0);
+		break;
+	case NonInvert:
+		TCCR0A |= (1 << COM0B1);
+		TCCR0A &= ~(1 << COM0B0);
+		break;
+	case Invert:
+		TCCR0A |= (1 << COM0B1);
+		TCCR0A |= (1 << COM0B0);
+		break;
+	}
+}
 
 void Timer0Mode(unsigned char mode) {
 	// WGM01 WMG00

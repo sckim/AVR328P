@@ -8,8 +8,6 @@
 #ifndef TIMER0_H_
 #define TIMER0_H_
 
-#include <avr/interrupt.h>
-
 #define Normal 	0
 #define PWM		1
 #define CTC		2

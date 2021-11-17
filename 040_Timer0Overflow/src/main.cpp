@@ -8,23 +8,24 @@
  *************************************/
 
 #include <avr/io.h>
-#include <avr/interrupt.h>
+//#include <avr/interrupt.h>
 
-// from TCNT = (CS / 16000000 ) * (256-x) =10msec
+// from TCNT = (CS/16000000 ) * (256-x) = 8msec
+// 64uS * ? = 8msec
 // x = time * (16000000/CS)
 // 15625*8msec = 125
 #define cDelay 256-125
 
-volatile int sec = 0;
-volatile int msec8 = 0;
+volatile char sec = 0;
+volatile char msec8 = 0;
 
 int main(void) {
-	char s10, s1;
+	char s1;
 
-	DDRD = 0xFF;
+	DDRD |= 0xF0;
 	DDRB |= _BV(PB5);
 
-	PORTD = (sec << 4) + msec8;
+	PORTD = (sec << 4);
 
 	TCCR0A = 0;
 	//CS0[2:0]
@@ -43,7 +44,7 @@ int main(void) {
 			if (msec8 == 125) {
 				sec++;
 				msec8 = 0;
-				s10 = sec / 10;
+//				s10 = sec / 10;
 				s1 = sec % 10;
 				//PORTD = (s10 << 4) + s1;
 				PORTD = s1<<4;
