@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include "timer0.h"
 
-#define DutyRatio	10
+#define DutyRatio	20
 #define DutyValue (DutyRatio / 100.0 * 256)
 
 int main(void)
@@ -17,7 +17,7 @@ int main(void)
 	OCR0B = 2*DutyValue;
 	// set PWM for 50% duty cycle
 
-	Timer0Mode(PWM);		 // Compare capture mode
+	Timer0Mode(FPWM);		 // Compare capture mode
 	Timer0Prescaler(1024);	 // 16MHz/256 => 1 step = 16us
 	Timer0OutputA(Invert);
 	Timer0OutputB(NonInvert);
