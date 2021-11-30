@@ -1,9 +1,3 @@
-#include <Arduino.h>
-
-int SerialIn = 3; 
-int LatchCP = 4;
-int ShiftCP = 5; 
-
 int pos = 0;
 
 /*
@@ -23,28 +17,91 @@ unsigned char lookup[8] = {
     0b11111111
 };
 
+#ifndef Arduino
+    #include <avr/io.h>
+    #include <util/delay.h>
+    
+    #ifndef cbi
+    #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+    #endif
+    #ifndef sbi
+    #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+    #endif
 
-void setup()
-{  
-  pinMode(SerialIn, OUTPUT);
-  pinMode(LatchCP, OUTPUT);
-  pinMode(ShiftCP, OUTPUT);
-}
+    #define LSBFIRST 0
+    #define MSBFIRST 1
 
-void loop()
-{
-  //array index
-  int index = pos % 8;
-  
-  //shiftOut(dataPin, clockPin, bitOrder, value);
-  shiftOut(SerialIn, ShiftCP, MSBFIRST, lookup[index]);
-  
-  // Generate latch clock
-  digitalWrite(LatchCP, LOW);
-  delayMicroseconds(1);  
-  digitalWrite(LatchCP, HIGH);
-  
-  pos++;
- 	
-  delay(500);
-}
+    #define SerialIn    PD3
+    #define LatchCP     PD4
+    #define ShiftCP     PD5
+
+    #define cPORT       PORTD
+    #define cDDR        DDRD
+
+    void shiftOut(uint8_t bitOrder, uint8_t val) {
+        uint8_t i;
+
+        for (i = 0; i < 8; i++) {
+            if (bitOrder == LSBFIRST)	{
+                if(val & (1 << i))
+                    sbi(cPORT, SerialIn);
+                else
+                    cbi(cPORT, SerialIn);
+            }
+            else{
+                if(val & (1 << (7 - i)))
+                    sbi(cPORT, SerialIn);
+                else
+                    cbi(cPORT, SerialIn);
+            }
+
+            sbi(cPORT, ShiftCP);
+            //_delay_ms(100);
+            cbi(cPORT, ShiftCP);
+	    }
+    }
+
+    int main(void)  
+    {
+        sbi(cDDR, SerialIn);
+        sbi(cDDR, LatchCP);
+        sbi(cDDR, ShiftCP);
+
+        while(1) {
+            shiftOut(MSBFIRST, lookup[pos++ % 8]);
+        
+            // Generate latch clock
+            cbi(cPORT, LatchCP);
+            sbi(cPORT, LatchCP);            
+
+            _delay_ms(100);
+        }
+    }
+#else
+    #include <Arduino.h>
+
+    #define SerialIn    3
+    #define LatchCP     4
+    #define ShiftCP     5
+
+    void setup()
+    {  
+        pinMode(SerialIn, OUTPUT);
+        pinMode(LatchCP, OUTPUT);
+        pinMode(ShiftCP, OUTPUT);
+    }
+    void loop()
+    {  
+        //shiftOut(dataPin, clockPin, bitOrder, value);
+        shiftOut(SerialIn, ShiftCP, MSBFIRST, lookup[pos % 8]);
+        
+        // Generate latch clock
+        digitalWrite(LatchCP, LOW);
+        digitalWrite(LatchCP, HIGH);
+        
+        pos++;
+            
+        delay(500);
+    }
+#endif
+
