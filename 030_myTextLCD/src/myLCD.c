@@ -22,7 +22,7 @@
 //#define LED_TurnOn 	sbi(PORTC,3)
 //#define LED_TurnOff	cbi(PORTC,3)
 
-unsigned char display_data1[ ]="   2 HANKYONG 2";
+unsigned char display_data1[ ]="   HANKYONG";
 unsigned char display_data2[ ]="   UNIVERSITY  ";
 
 void lcd_enable(void)
@@ -170,7 +170,7 @@ void lcd_init(void)
 int main(void)
 {
 	LDDR = 0xff;
-	LCDR = 0x0f;
+	LCDR = 0x07;
 
 	LDP = 0x00;
 
