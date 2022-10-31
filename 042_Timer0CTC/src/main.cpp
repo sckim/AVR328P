@@ -1,61 +1,55 @@
 /*************************************
+ * Purpose: Timer0을 이용하여 1초마다 overflow
  *
- * TIMSK0
  * TCCR0A
  * TCCR0B
  * OCR0A
  *************************************/
 #include <avr/io.h>
-//#include <avr/interrupt.h>
+#include <avr/interrupt.h>
 
-// 15625*8msec = 125
 #define cDelay 125
 
 volatile int sec = 0;
 volatile int msec8 = 0;
 
+void dispSeg(unsigned char ch) {
+	PORTB &= 0xF0;
+	PORTB |= ch;
+}
+
 int main(void) {
-	char s10, s1;
+    DDRB |= 0x0F; 
+    DDRD |= _BV(PD6);
 
-	DDRD = 0xFF;
-	DDRB |= _BV(PB5);
+    // Waveform Generation Mode 6가지 중 하나를 선택
+    // CTC mode를 활성화한다.
+    TCCR0A |= (1<<WGM01);
 
-	PORTD = 0;
+    //CS0[2:0]
+    TCCR0B |= (1 << CS02);    // Clock/1024
+    TCCR0B |= (1 << CS00);    // Clock/1024
 
-	//Set CTC mode
-	TCCR0A |= (1<<WGM01);
-	//CS0[2:0]
-	TCCR0B |= (1 << CS02);	// Clock/1024
-	TCCR0B |= (1 << CS00);	// Clock/1024
+    // Clear OC0A on Compare Match
+    // set OC0A at BOTTOM (non-inverting mode)
+    TCCR0A |= _BV(COM0A0);
 
-	// Toggle on Compare Match
-	//TCCR0A |= _BV(COM0A1);
-	TCCR0A |= _BV(COM0A0);
-	
-	//TCCR0A |= _BV(COM0B1);
-	TCCR0A |= _BV(COM0B0);
 
-	OCR0A = cDelay;
-	while (1) {
-		// Check overflow flag
-		if (bit_is_set(TIFR0, OCF0A)) {
-			// reset the overflow flag
-			TIFR0 |= _BV(OCF0A);
+    OCR0A = cDelay;
+    while (1) {
+        // Check overflow flag
+        if (bit_is_set(TIFR0, OCF0A)) {
+            // reset the overflow flag
+            TIFR0 |= _BV(OCF0A);
 
-			msec8++;
-			if (msec8 == 125) {
-				sec++;
-				msec8 = 0;
-				s10 = sec / 10;
-				s1 = sec % 10;
-				//PORTD = (s10 << 4) + s1;
-				PORTD = s1;
-
-			}
-			if (sec == 99) {
-				sec = 0;
-			}
-			PORTB ^= _BV(PB5);
-		}
-	}
+            msec8++;
+            if (msec8 == 125) {
+                msec8 = 0;
+                dispSeg(sec++);
+            }
+            if (sec == 10) {
+                sec = 0;
+            }
+        }
+    }
 }
