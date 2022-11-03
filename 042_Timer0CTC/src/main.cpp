@@ -1,12 +1,4 @@
-/*************************************
- * Purpose: Timer0을 이용하여 1초마다 overflow
- *
- * TCCR0A
- * TCCR0B
- * OCR0A
- *************************************/
 #include <avr/io.h>
-#include <avr/interrupt.h>
 
 #define cDelay 125
 
@@ -20,7 +12,7 @@ void dispSeg(unsigned char ch) {
 
 int main(void) {
     DDRB |= 0x0F; 
-    DDRD |= _BV(PD6);
+
 
     // Waveform Generation Mode 6가지 중 하나를 선택
     // CTC mode를 활성화한다.
@@ -32,6 +24,7 @@ int main(void) {
 
     // Clear OC0A on Compare Match
     // set OC0A at BOTTOM (non-inverting mode)
+    DDRD |= _BV(PD6);
     TCCR0A |= _BV(COM0A0);
 
 
