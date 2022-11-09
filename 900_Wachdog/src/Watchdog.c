@@ -15,6 +15,20 @@ void WDT_off(void) {
 	WDTCSR = 0x00;
 	sei();
 }
+// void WDT_off(void)
+// {
+// 	__disable_interrupt();
+// 	__watchdog_reset();
+// 	/* Clear WDRF in MCUSR */
+// 	MCUSR &= ~(1<<WDRF);
+// 	/* Write logical one to WDCE and WDE */
+// 	/* Keep old prescaler setting to prevent unintentional time-out */
+// 	WDTCSR |= (1<<WDCE) | (1<<WDE);
+// 	/* Turn off WDT */
+// 	WDTCSR = 0x00;
+// 	__enable_interrupt();
+// }
+
 
 void WDT_Prescaler_Change(int time) {
 	// Turn off global interrupt
@@ -34,10 +48,19 @@ void WDT_Prescaler_Change(int time) {
 // Turn on global interrupt
 	sei();
 }
-
+// void WDT_Prescaler_Change(void)
+// {
+// 	__disable_interrupt();
+// 	__watchdog_reset();
+// 	/* Start timed sequence */
+// 	WDTCSR |= (1<<WDCE) | (1<<WDE);
+// 	/* Set new prescaler(time-out) value = 64K cycles (~0.5 s) */
+// 	WDTCSR = (1<<WDE) | (1<<WDP2) | (1<<WDP0);
+// 	__enable_interrupt();
+// }
 
 int main(void) {
-	WDT_Prescaler_Change(WDTO_250MS);
+	WDT_Prescaler_Change(WDTO_60MS);
 
 	DDRB |= _BV(5);  // watchdog timer 인터럽트
 	DDRD |= _BV(6);  // timer reset 상태
@@ -53,7 +76,7 @@ int main(void) {
 	_delay_ms(10);
 
 	while (1){
-		_delay_ms(20);
+		_delay_ms(100);
 		PORTD ^= _BV(6);
 		wdt_reset();
 	}

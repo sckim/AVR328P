@@ -4,9 +4,13 @@
 			"path": "."
 		},
 		{
-			"name": "811_Motor_RC",
-			"path": "811_Motor_RC"
+			"name": "105_SerialShift_595",
+			"path": "105_SerialShift_595"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"files.associations": {
+			"delay.h": "c"
+		}
+	}
 }
