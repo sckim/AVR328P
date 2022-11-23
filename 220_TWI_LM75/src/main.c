@@ -26,7 +26,7 @@ int main(void) {
 	uart_init(9600UL);
 
 	// -------- Inits --------- //
-	clock_prescale_set(clock_div_1); /* 8MHz */
+	//clock_prescale_set(clock_div_1); /* 8MHz */
 	printf("\r\n====  i2c Thermometer  ====\r\n");
 	i2cInit();
 
