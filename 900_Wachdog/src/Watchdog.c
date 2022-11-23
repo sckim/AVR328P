@@ -60,23 +60,24 @@ void WDT_Prescaler_Change(int time) {
 // }
 
 int main(void) {
-	WDT_Prescaler_Change(WDTO_60MS);
-
 	DDRB |= _BV(5);  // watchdog timer 인터럽트
 	DDRD |= _BV(6);  // timer reset 상태
 	PORTD |= 0b00000000;
 
+	_delay_ms(50);
 	PORTD |= _BV(6);
 	_delay_ms(10);
-	PORTD = 0;
+	PORTD &= ~_BV(6);
 	_delay_ms(10);
 	PORTD |= _BV(6);
 	_delay_ms(10);
-	PORTD = 0;
-	_delay_ms(10);
+	PORTD &= ~_BV(6);
+
+	WDT_Prescaler_Change(WDTO_15MS);
+	//WDT_Prescaler_Change(WDTO_2S);
 
 	while (1){
-		_delay_ms(100);
+		_delay_ms(50);
 		PORTD ^= _BV(6);
 		wdt_reset();
 	}
@@ -84,4 +85,5 @@ int main(void) {
 
 ISR(WDT_vect) {
 	PORTB ^= _BV(5);
+	_delay_ms(10);
 }
