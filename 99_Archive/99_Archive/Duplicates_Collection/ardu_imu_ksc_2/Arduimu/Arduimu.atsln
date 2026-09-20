@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Arduimu", "Arduimu.cppproj", "{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Spal_9DOF_v4", "..\..\Spal_9DOF_v4\Spal_9DOF_v4.cppproj", "{07B459B4-8D76-4638-BC6D-A459BA2D616B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Debug|AVR.ActiveCfg = Debug|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Debug|AVR.Build.0 = Debug|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Release|AVR.ActiveCfg = Release|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Release|AVR.Build.0 = Release|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.ActiveCfg = Debug|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.Build.0 = Debug|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.ActiveCfg = Release|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

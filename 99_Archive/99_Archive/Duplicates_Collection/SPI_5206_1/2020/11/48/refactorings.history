@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;SPI_5206/Comm_SPI.ino&apos; to &apos;SPI_5206.ino&apos;" description="Rename resource &apos;Comm_SPI.ino&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Comm_SPI.ino" name="SPI_5206.ino" stamp="1606288698083" updateReferences="true"/>
+</session>

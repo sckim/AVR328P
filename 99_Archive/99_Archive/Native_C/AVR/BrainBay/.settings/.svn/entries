@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="13"
+   name=""
+   committed-date="2010-01-25T12:55:27.125000Z"
+   url="https://sckim/svn/AVR/BrainBay/.settings"
+   last-author="lab1"
+   kind="dir"
+   uuid="452e6e81-dd5d-4741-bad4-918650e724a6"
+   repos="https://sckim/svn/AVR"
+   revision="13"/>
+<entry
+   committed-rev="13"
+   name="de.innot.avreclipse.core.prefs"
+   text-time="2010-01-25T13:00:50.453125Z"
+   committed-date="2010-01-25T12:55:27.125000Z"
+   checksum="7d51b5a7bed1d7d2d8b58281f0d13e82"
+   last-author="lab1"
+   kind="file"
+   prop-time="2010-01-25T13:00:50.437500Z"/>
+</wc-entries>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Morse/Arduino 328.pdsprj&apos; to &apos;Arduino_Morse.pdsprj&apos;" description="Rename resource &apos;Arduino 328.pdsprj&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="Arduino 328.pdsprj" name="Arduino_Morse.pdsprj" stamp="1602425870420" updateReferences="true"/>
+</session>

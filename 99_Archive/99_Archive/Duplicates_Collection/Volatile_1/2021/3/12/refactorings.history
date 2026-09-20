@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Volatile/PCINT.ino&apos; to &apos;Volatile.ino&apos;" description="Rename resource &apos;PCINT.ino&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="PCINT.ino" name="Volatile.ino" stamp="1615825650624" updateReferences="true"/>
+</session>

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Razor_AHRS", "Razor_AHRS.cppproj", "{6919A6F5-F916-4FD8-92A5-8FC1A801219E}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Arduimu", "..\..\..\ardu_imu_1.9.8\libraries\Arduimu\Arduimu.cppproj", "{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6919A6F5-F916-4FD8-92A5-8FC1A801219E}.Debug|AVR.ActiveCfg = Debug|AVR
+		{6919A6F5-F916-4FD8-92A5-8FC1A801219E}.Debug|AVR.Build.0 = Debug|AVR
+		{6919A6F5-F916-4FD8-92A5-8FC1A801219E}.Release|AVR.ActiveCfg = Release|AVR
+		{6919A6F5-F916-4FD8-92A5-8FC1A801219E}.Release|AVR.Build.0 = Release|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Debug|AVR.ActiveCfg = Debug|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Debug|AVR.Build.0 = Debug|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Release|AVR.ActiveCfg = Release|AVR
+		{B51B00ED-3CA0-4A1D-A47A-5F8CF4DF4021}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
