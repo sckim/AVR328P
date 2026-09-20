@@ -1,0 +1,4 @@
+M .idea/misc.xml
+?? .idea/bp6a_serial_analyser.iml
+?? .idea/vcs.xml
+?? DetailView/__pycache__/

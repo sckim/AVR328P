@@ -1,0 +1,376 @@
+diff --git a/platformio.ini b/platformio.ini
+index 1662f23..f931afd 100644
+--- a/platformio.ini
++++ b/platformio.ini
+@@ -49,7 +49,8 @@ lib_deps =
+ 
+ ; lib_ignore =                 ; 무시할 라이브러리
+ ;     SomeLibrary
+-; upload_port = COM9           ; 업로드 포트
++; upload_port = COM4           ; 업로드 포트
++; monitor_speed = 115200  ; 시리얼 모니터 속도
+ 
+ ; change microcontroller
+ ; board_build.mcu = nrf52840
+diff --git a/src/main.cpp b/src/main.cpp
+index 333c66b..e4db309 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -1,33 +1,339 @@
++/*
+ #include "S1sBp6a.h"
++#include <Adafruit_TinyUSB.h>
++#include <bluefruit.h>
+ 
++// BLE UART Service
++BLEUart bleuart;
+ uint32_t rawSignalBuffer[CHANNEL_MAX][SAMPLE_LENGTH_MAX];
+ 
++uint32_t simulated_data = 0;
++
++// Variables for loop counting
++unsigned long lastTime = 0;
++unsigned int loopCounter = 0;
++const unsigned long LOOP_CHECK_INTERVAL = 1000; // Check every 1000ms (1 second)
++
++// Helper function to send data through both Serial and BLE
++void sendData(const char *str, bool isNewLine = false, bool useSerial = true, bool useBLE = false)
++{
++    bool serialSuccess = true;
++    bool bleSuccess = true;
++
++    if (useSerial)
++    {
++        if (isNewLine)
++        {
++            serialSuccess = SERIAL_OUT.println(str) > 0;
++        }
++        else
++        {
++            serialSuccess = SERIAL_OUT.print(str) > 0;
++        }
++
++        if (!serialSuccess)
++        {
++            SERIAL_OUT.println("Error: Failed to send data over Serial.");
++        }
++    }
++
++    if (useBLE)
++    {
++        if (isNewLine)
++        {
++            bleSuccess = bleuart.println(str) > 0;
++        }
++        else
++        {
++            bleSuccess = bleuart.print(str) > 0;
++        }
++
++        if (!bleSuccess)
++        {
++            SERIAL_OUT.println("Error: Failed to send data over BLE.");
++        }
++    }
++}
++
++void setup_ble()
++{
++    Bluefruit.begin();
++    Bluefruit.setName("BP6A_Monitor");
++
++    // Configure and start BLE UART service
++    bleuart.begin();
++
++    // Start advertising
++    Bluefruit.Advertising.addFlags(BLE_GAP_ADV_FLAGS_LE_ONLY_GENERAL_DISC_MODE);
++    Bluefruit.Advertising.addTxPower();
++    Bluefruit.Advertising.addService(bleuart);
++    Bluefruit.ScanResponse.addName();
++
++    Bluefruit.Advertising.restartOnDisconnect(true);
++    Bluefruit.Advertising.setInterval(32, 244); // in unit of 0.625 ms
++    Bluefruit.Advertising.setFastTimeout(30);   // number of seconds in fast mode
++    Bluefruit.Advertising.start(0);             // 0 = Don't stop advertising after n seconds
++}
++
++void setup()
++{
++    SERIAL_OUT.begin(460800);
++    while (!SERIAL_OUT)
++        ; // Wait for serial port to connect. Needed for native USB port only
++
++    setup_ble();  // Initialize BLE
++
++    bp6a.begin(OP_MODE_ECG0);
++    bp6a.start();
++}
++
++void loop()
++{
++    const int subSampling = 20; // for pretty graph output
++    char dataStr[80];           // Buffer for converting numbers to strings
++
++    int numOfChannels = bp6a.channelCount();
++    int numOfSamples = bp6a.available(0);
++    if (numOfSamples <= 0)
++    {
++        return;
++    }
++
++    // Check if 1 second has passed
++    unsigned long currentTime = millis();
++    if (currentTime - lastTime >= LOOP_CHECK_INTERVAL)
++    {
++        // Print loops per second
++        sprintf(dataStr, "Loops per second: %u", loopCounter);
++        SERIAL_OUT.println(dataStr);
++
++        // Reset counter and update last check time
++        loopCounter = 0;
++        lastTime = currentTime;
++    }
++
++    for (int ch = 0; ch < numOfChannels; ch++)
++    {
++        bp6a.readData(ch, rawSignalBuffer[ch], numOfSamples);
++    }
++
++    for (int index = 0; index < numOfSamples; index += subSampling)
++    {
++        for (int ch = 0; ch < numOfChannels - 1; ch++)
++        {
++            // SERIAL_OUT.print(rawSignalBuffer[ch][index]);
++            // SERIAL_OUT.print(",");
++            sprintf(dataStr, "%lu,", rawSignalBuffer[ch][index]);
++            // sprintf(dataStr, "%lu,", simulated_data++);
++            sendData(dataStr, false, true, false);
++        }
++        // SERIAL_OUT.println(rawSignalBuffer[numOfChannels - 1][index]);
++        sprintf(dataStr, "%lu", rawSignalBuffer[numOfChannels - 1][index]);
++        // sprintf(dataStr, "%lu", simulated_data++);
++        sendData(dataStr, true, true, false); // true for newline, useSerial = false, useBLE = true
++        loopCounter++;
++    }
++}
++*/
++
++#include <bluefruit.h>
++#include "S1sBp6a.h"
++
++#define PAYLOAD_SIZE    20
++
++#define ECG_SERVICE_UUID  "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
++#define ECG_CHAR_UUID     "6e400003-b5a3-f393-e0a9-e50e24dcca9e"
++#define BPM_CHAR_UUID     "6e400004-b5a3-f393-e0a9-e50e24dcca9e"
++#define ECG_BATTERY_UUID  "6e400005-b5a3-f393-e0a9-e50e24dcca9e"
++
++BLEService       ecgService(ECG_SERVICE_UUID);
++BLECharacteristic ecgCharacteristic(ECG_CHAR_UUID);
++BLECharacteristic bpmCharacteristic(BPM_CHAR_UUID);
++BLECharacteristic batteryCharacteristic(ECG_BATTERY_UUID);
++
++#define SUBSAMPLING        16
++#define ECG_CHANNEL        0
++#define MAX_SAMPLES        64
++#define HALF_SAMPLES       (MAX_SAMPLES / 2)
++#define BATCH_INTERVAL     250
++
++uint32_t rawBuf[CHANNEL_MAX][SAMPLE_LENGTH_MAX];
++int16_t  sampleBuf[MAX_SAMPLES];
++int      sampleIdx = 0;
++bool     isConnected = false;
++unsigned long lastBatchTime = 0;
++unsigned long lastBpmTime = 0;
++
++// 🔋 배터리 측정 관련 변수
++float vbatSum = 0;
++int vbatCount = 0;
++unsigned long lastVbatUpdate = 0;
++const unsigned long VBAT_SEND_INTERVAL = 3000;
++
++// 🔋 배터리 전압 측정 함수
++float readVBAT() {
++  analogReference(AR_INTERNAL_3_0);
++  analogReadResolution(12);
++  delay(1);
++  float sum = 0;
++  const int N = 5;
++  for (int i = 0; i < N; i++) {
++    sum += analogRead(A6);
++    delay(1);
++  }
++  analogReference(AR_DEFAULT);
++  analogReadResolution(10);
++  float avg = sum / N;
++  return avg * 1.446F;
++}
++
++// 🔋 전압(mV) → 5단계 배터리 구간 변환 함수
++uint8_t batteryStepFromMV(float mv) {
++  if (mv >= 4000) return 5;
++  else if (mv >= 3850) return 4;
++  else if (mv >= 3700) return 3;
++  else if (mv >= 3550) return 2;
++  else return 1;
++}
++
++void debugPrintBattery(uint8_t step, float mv) {
++  if (Serial) {
++    Serial.print("Battery: ");
++    Serial.print(mv);
++    Serial.print("mV, Stemp: ");
++    Serial.println(step);
++  }
++}
++
++void connect_callback(uint16_t conn_handle) {
++  SERIAL_OUT.println("✅ BLE Connected");
++  isConnected = true;
++  Bluefruit.Periph.setConnInterval(6, 6);
++}
++
++void disconnect_callback(uint16_t conn_handle, uint8_t reason) {
++  SERIAL_OUT.println("⚠️ BLE Disconnected");
++  isConnected = false;
++  sampleIdx = 0;
++  Bluefruit.Advertising.start(0);
++}
++
+ void setup() {
+-  SERIAL_OUT.begin(460800);
+-  while (!SERIAL_OUT);  // Wait for serial port to connect. Needed for native USB port only
++  SERIAL_OUT.begin(115200);
+ 
+-  bp6a.begin(OP_MODE_PPG0);
++  bp6a.begin(OP_MODE_ECG0);
+   bp6a.start();
++
++  Bluefruit.begin();
++  Bluefruit.setName("SPAL ECG Analyzer");
++  Bluefruit.setTxPower(4);
++  Bluefruit.Periph.setConnectCallback(connect_callback);
++  Bluefruit.Periph.setDisconnectCallback(disconnect_callback);
++
++  ecgService.begin();
++
++  ecgCharacteristic.setProperties(CHR_PROPS_NOTIFY);
++  ecgCharacteristic.setPermission(SECMODE_OPEN, SECMODE_NO_ACCESS);
++  ecgCharacteristic.setMaxLen(PAYLOAD_SIZE);
++  ecgCharacteristic.begin();
++
++  bpmCharacteristic.setProperties(CHR_PROPS_NOTIFY);
++  bpmCharacteristic.setPermission(SECMODE_OPEN, SECMODE_NO_ACCESS);
++  bpmCharacteristic.setFixedLen(sizeof(int16_t));
++  bpmCharacteristic.begin();
++
++  batteryCharacteristic.setProperties(CHR_PROPS_READ | CHR_PROPS_NOTIFY);
++  batteryCharacteristic.setPermission(SECMODE_OPEN, SECMODE_NO_ACCESS);
++  batteryCharacteristic.setFixedLen(1);
++  batteryCharacteristic.begin();
++
++  Bluefruit.Advertising.addService(ecgService);
++  Bluefruit.Advertising.addName();
++  Bluefruit.Advertising.setInterval(32, 244);
++  Bluefruit.Advertising.setFastTimeout(30);
++  Bluefruit.Advertising.restartOnDisconnect(true);
++  Bluefruit.Advertising.start(0);
++
++  lastBatchTime = millis();
++  lastBpmTime = millis();
++  lastVbatUpdate = millis();
+ }
+ 
+-void loop() {
+-  const int subSampling = 20; // for pretty graph output
++void sendEcg(int count) {
++  if (count <= 0) return;
++  uint8_t* ptr = (uint8_t*)sampleBuf;
++  int totalBytes = count * sizeof(int16_t);
++  for (int off = 0; off < totalBytes; off += PAYLOAD_SIZE) {
++    int len = min(PAYLOAD_SIZE, totalBytes - off);
++    ecgCharacteristic.notify(ptr + off, len);
++    delay(5);
++  }
++  SERIAL_OUT.print("📤 ECG samples sent: ");
++  SERIAL_OUT.println(count);
++}
+ 
+-  int numOfChannels = bp6a.channelCount();
+-  int numOfSamples = bp6a.available(0);
+-  if (numOfSamples <= 0) {
+-    return;
++void sendBpm() {
++  BpAlgoResult& result = bp6a.readAlgoResult();
++  if (result.ecg.available()) {
++    int16_t bpm = (int16_t)result.ecg.heartRate;
++    bpmCharacteristic.notify((uint8_t*)&bpm, sizeof(int16_t));
++    SERIAL_OUT.print("❤️ BPM sent: ");
++    SERIAL_OUT.println(bpm);
+   }
++}
+ 
+-  for (int ch = 0; ch < numOfChannels; ch++) {
+-    bp6a.readData(ch, rawSignalBuffer[ch], numOfSamples);
++void loop() {
++  if (!isConnected) {
++    delay(10);
++    return;
+   }
+ 
+-  for (int index = 0; index < numOfSamples; index+= subSampling) {
+-    for (int ch = 0; ch < numOfChannels - 1; ch++) {
+-      SERIAL_OUT.print(rawSignalBuffer[ch][index]);
+-      SERIAL_OUT.print(",");
++  int avail = bp6a.available(ECG_CHANNEL);
++  if (avail > 0) {
++    bp6a.readData(ECG_CHANNEL, rawBuf[ECG_CHANNEL], avail);
++    for (int i = 0; i < avail && sampleIdx < MAX_SAMPLES; i += SUBSAMPLING) {
++      uint32_t raw = rawBuf[ECG_CHANNEL][i];
++      if (raw == 0 || raw > 1000000) continue;
++      sampleBuf[sampleIdx++] = (int16_t)raw;
++      if (sampleIdx >= HALF_SAMPLES) {
++        sendEcg(sampleIdx);
++        int rem = sampleIdx - HALF_SAMPLES;
++        if (rem > 0) {
++          memmove(sampleBuf, sampleBuf + HALF_SAMPLES, rem * sizeof(int16_t));
++        }
++        sampleIdx = rem;
++        lastBatchTime = millis();
++      }
+     }
+-    SERIAL_OUT.println(rawSignalBuffer[numOfChannels - 1][index]);
+   }
+-}
++
++  unsigned long now = millis();
++  if (now - lastBatchTime >= BATCH_INTERVAL && sampleIdx > 0) {
++    sendEcg(sampleIdx);
++    sampleIdx = 0;
++    lastBatchTime = now;
++  }
++
++  // ✅ BPM 전송 (1초 간격)
++  if (now - lastBpmTime >= 1000) {
++    sendBpm();
++    lastBpmTime = now;
++  }
++
++  // 🔋 배터리 전송 (30초 간격, 평균 기반)
++  float mv = readVBAT();
++  vbatSum += mv;
++  vbatCount++;
++  if (now - lastVbatUpdate >= VBAT_SEND_INTERVAL && vbatCount > 0) {
++    float avg = vbatSum / vbatCount;
++    uint8_t step = batteryStepFromMV(avg);
++    batteryCharacteristic.write8(step);
++    batteryCharacteristic.notify8(step);
++    debugPrintBattery(step, avg);
++    vbatSum = 0;
++    vbatCount = 0;
++    lastVbatUpdate = now;
++  }
++
++  delay(1);
++}
+\ No newline at end of file
